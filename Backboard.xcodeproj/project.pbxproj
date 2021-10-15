@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		641BAC60271A05C6000A5C25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 641BAC5F271A05C6000A5C25 /* GoogleService-Info.plist */; };
 		74F8399C848AD4BB1812D3AB /* Pods_Backboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 470AAAA17D48939E49BE64FF /* Pods_Backboard.framework */; };
 		DA936282271611D6000F00B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA936281271611D6000F00B7 /* AppDelegate.swift */; };
 		DA936284271611D6000F00B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA936283271611D6000F00B7 /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		1CA07D403A57D9475EB213CF /* Pods-Backboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Backboard.release.xcconfig"; path = "Target Support Files/Pods-Backboard/Pods-Backboard.release.xcconfig"; sourceTree = "<group>"; };
 		470AAAA17D48939E49BE64FF /* Pods_Backboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Backboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		641BAC5F271A05C6000A5C25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A398C8BD6E9AF267C987DD8 /* Pods-Backboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Backboard.debug.xcconfig"; path = "Target Support Files/Pods-Backboard/Pods-Backboard.debug.xcconfig"; sourceTree = "<group>"; };
 		DA93627E271611D6000F00B7 /* Backboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Backboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA936281271611D6000F00B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				DA93629527161474000F00B7 /* SignUpViewController.swift */,
 				DA93628A271611D7000F00B7 /* Assets.xcassets */,
 				DA93628F271611D7000F00B7 /* Info.plist */,
+				641BAC5F271A05C6000A5C25 /* GoogleService-Info.plist */,
 			);
 			path = Backboard;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA93628E271611D7000F00B7 /* LaunchScreen.storyboard in Resources */,
+				641BAC60271A05C6000A5C25 /* GoogleService-Info.plist in Resources */,
 				DA93628B271611D7000F00B7 /* Assets.xcassets in Resources */,
 				DA936289271611D6000F00B7 /* Main.storyboard in Resources */,
 			);
