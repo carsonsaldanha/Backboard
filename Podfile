@@ -4,6 +4,7 @@ target 'Backboard' do
   use_frameworks!
 
   # Pods for Backboard
+  pod 'Firebase/Auth'
   pod 'Alamofire', '~> 5.4'
   pod 'SwiftyJSON', '~> 4.0'
 
