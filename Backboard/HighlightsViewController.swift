@@ -23,7 +23,7 @@ class HighlightsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let highlightsCellIdentifier = "Highlights Cell"
     var highlightTitles: [String] = []
-    var highlightLinks: [String] = []
+    var highlightVideoIDs: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,50 +34,62 @@ class HighlightsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // Returns the number of highlights in the table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return highlightTitles.count
-        return 1
+        return highlightTitles.count
     }
     
     // Sets the highlight title and video of each cell in the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: highlightsCellIdentifier, for: indexPath) as! HighlightsTableViewCell
         let row = indexPath.row
-//        cell.highlightTitleLabel?.text = highlightTitles[row]
-        cell.highlightTitleLabel?.text = "Testing"
-        
-        let videoHTML = "<div style=\"width: 100%; height: 0px; position: relative; padding-bottom: 56.250%;\">" +
-                        "<iframe src=\"https://streamable.com/e/ndkvfn\" frameborder=\"0\" width=\"100%\" height=\"100%\"" +
-                        "allowfullscreen style=\"width: 100%; height: 100%; position: absolute;\"></iframe></div>"
+        cell.highlightTitleLabel?.text = highlightTitles[row]
+        let videoHTML = "<div style=\"width: 100%; height: 0px; position: relative; padding-bottom: 56.250%;" +
+                        "border-radius: 23px; overflow: hidden;\">" +
+                        "<iframe src=\"https://streamable.com/e/\(highlightVideoIDs[row])\" frameborder=\"0\"" +
+                        "width=\"100%\" height=\"100%\" allowfullscreen style=\"width: 100%; height: 100%;" +
+                        "position: absolute;\"></iframe></div>"
         cell.highlightVideoWebView.loadHTMLString(videoHTML, baseURL: nil)
         return cell
     }
     
-    // Pulls NBA articles from the news API and updates the table
+    // Pulls NBA highlights from the reddit API and updates the table
     func fetchHighlights() {
-        // Parse this? https://www.reddit.com/search/?q=subreddit%3Anba%20site%3Astreamable.com&sort=new
-        
-
-//        AF.request(redditAPI, method: .get).validate().responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                // Only parse the first 25 articles and add the data to the arrays
-//                for article in 0...24 {
-//                    if let title = json["articles"][article]["title"].string {
-//                        self.highlightTitles.append(title)
-//                    }
-//                    if let url = json["articles"][article]["url"].string {
-//                        self.highlightLinks.append(url)
-//                    }
-//                }
-//            case .failure(let error):
-//                print(error)
-//            }
-//            // Reload the table after the API request is compelete
-//            DispatchQueue.main.async {
-//                self.highlightsTableView.reloadData()
-//            }
-//        }
+        let redditAPI = "https://www.reddit.com/search/.json?q=subreddit%3Anba%20site%3Astreamable.com&sort=new"
+        AF.request(redditAPI, method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                // Only parse the first 25 highlights and add the data to the arrays
+                for highlight in 0...24 {
+                    if var title = json["data"]["children"][highlight]["data"]["title"].string {
+                        // If the post was labeled as a "Highlight", trim the start of the title
+                        if let flair = json["data"]["children"][highlight]["data"]["link_flair_text"].string,
+                           flair == "Highlight" {
+                            title = self.trimString(str: title, trimIndex: 12)
+                        }
+                        self.highlightTitles.append(title)
+                    }
+                    if let url = json["data"]["children"][highlight]["data"]["url"].string {
+                        // Extract the video ID from the URL as a substring
+                        let videoID = self.trimString(str: url, trimIndex: 23)
+                        self.highlightVideoIDs.append(videoID)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+            // Reload the table after the API request is compelete
+            DispatchQueue.main.async {
+                self.highlightsTableView.reloadData()
+            }
+        }
+    }
+    
+    // Helper function to trim a String from a given index to the end
+    private func trimString(str: String, trimIndex: Int) -> String {
+        let start = str.index(str.startIndex, offsetBy: trimIndex)
+        let end = str.index(str.startIndex, offsetBy: str.count - 1)
+        let range = start...end
+        return String(str[range])
     }
 
 }
