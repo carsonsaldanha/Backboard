@@ -21,7 +21,6 @@
 		DA93629C27161501000F00B7 /* HighlightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA93629B27161501000F00B7 /* HighlightsViewController.swift */; };
 		DA93629E27161521000F00B7 /* StandingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA93629D27161521000F00B7 /* StandingsViewController.swift */; };
 		DA9362A02716152E000F00B7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA93629F2716152E000F00B7 /* SettingsViewController.swift */; };
-		F29F411527215630000F4C0B /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29F411427215630000F4C0B /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +42,6 @@
 		DA93629B27161501000F00B7 /* HighlightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsViewController.swift; sourceTree = "<group>"; };
 		DA93629D27161521000F00B7 /* StandingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsViewController.swift; sourceTree = "<group>"; };
 		DA93629F2716152E000F00B7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		F29F411427215630000F4C0B /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +105,6 @@
 				DA93629B27161501000F00B7 /* HighlightsViewController.swift */,
 				DA93629D27161521000F00B7 /* StandingsViewController.swift */,
 				DA93629F2716152E000F00B7 /* SettingsViewController.swift */,
-				F29F411427215630000F4C0B /* Game.swift */,
 				DA93628A271611D7000F00B7 /* Assets.xcassets */,
 				DA93628F271611D7000F00B7 /* Info.plist */,
 				641BAC5F271A05C6000A5C25 /* GoogleService-Info.plist */,
@@ -231,7 +228,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA93629C27161501000F00B7 /* HighlightsViewController.swift in Sources */,
-				F29F411527215630000F4C0B /* Game.swift in Sources */,
 				DA936286271611D6000F00B7 /* LogInViewController.swift in Sources */,
 				DA93629E27161521000F00B7 /* StandingsViewController.swift in Sources */,
 				DA936298271614AE000F00B7 /* ScoresViewController.swift in Sources */,
