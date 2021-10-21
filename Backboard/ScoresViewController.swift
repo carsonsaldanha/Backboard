@@ -10,11 +10,13 @@ import Alamofire
 import SwiftyJSON
 
 class ScoresTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var awayLogo: UIImageView!
     @IBOutlet weak var homeLogo: UIImageView!
     @IBOutlet weak var awayScore: UILabel!
     @IBOutlet weak var homeScore: UILabel!
     @IBOutlet weak var arenaName: UILabel!
+    
 }
 
 class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
