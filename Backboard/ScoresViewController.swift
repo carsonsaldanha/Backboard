@@ -41,10 +41,12 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         fetchGames()
     }
     
+    // Returns the number of games in the table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gamesList.count
     }
     
+    // Sets the scores, team info, arena info, live game info, etc. for each cell in the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: scoreCellIdentifier, for: indexPath) as! ScoresTableViewCell
         let row = indexPath.row
@@ -82,6 +84,8 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
 
+    // Pulls NBA articles from the NBA data API and updates the table
+    // Stores each game as a JSON since many variables within it will eventually need to be accessed
     func fetchGames() {
         let requestURL = "https://data.nba.net/data/10s/prod/v1/" + getTodaysDate() + "//scoreboard.json"
         
@@ -102,6 +106,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    // Helper function to get today's date for updated game info
     private func getTodaysDate() -> String {
         let date = Date()
         let format = DateFormatter()
