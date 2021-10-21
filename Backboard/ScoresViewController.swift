@@ -10,18 +10,28 @@ import Alamofire
 import SwiftyJSON
 
 class ScoresTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var awayLogo: UIImageView!
     @IBOutlet weak var homeLogo: UIImageView!
+    @IBOutlet weak var awayName: UILabel!
+    @IBOutlet weak var homeName: UILabel!
     @IBOutlet weak var awayScore: UILabel!
     @IBOutlet weak var homeScore: UILabel!
+    @IBOutlet weak var awayRecord: UILabel!
+    @IBOutlet weak var homeRecord: UILabel!
+    
     @IBOutlet weak var arenaName: UILabel!
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var attendance: UILabel!
+    
+    @IBOutlet weak var gameClock: UILabel!
 }
 
 class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var scoresTableView: UITableView!
     
-    var gamesList: [Game] = []
+    var gamesList: [JSON] = []
     let scoreCellIdentifier = "Scores Cell"
     
     override func viewDidLoad() {
@@ -39,47 +49,48 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: scoreCellIdentifier, for: indexPath) as! ScoresTableViewCell
         let row = indexPath.row
         
-        cell.awayScore?.text = gamesList[row].awayScore
-        cell.homeScore?.text = gamesList[row].homeScore
-        cell.arenaName?.text = gamesList[row].arena
+        cell.awayName?.text = gamesList[row]["vTeam"]["triCode"].stringValue
+        cell.homeName?.text = gamesList[row]["hTeam"]["triCode"].stringValue
+        cell.awayScore?.text = gamesList[row]["vTeam"]["score"].stringValue
+        cell.homeScore?.text = gamesList[row]["hTeam"]["score"].stringValue
+        cell.awayRecord?.text = gamesList[row]["vTeam"]["win"].stringValue + "-" + gamesList[row]["vTeam"]["loss"].stringValue
+        cell.homeRecord?.text = gamesList[row]["hTeam"]["win"].stringValue + "-" + gamesList[row]["hTeam"]["loss"].stringValue
+        
+        cell.awayLogo.image = UIImage(named: gamesList[row]["vTeam"]["teamId"].stringValue)
+        cell.homeLogo.image = UIImage(named: gamesList[row]["hTeam"]["teamId"].stringValue)
+        
+        cell.arenaName?.text = gamesList[row]["arena"]["name"].stringValue
+        cell.location?.text = gamesList[row]["arena"]["city"].stringValue + ", " + gamesList[row]["arena"]["stateAbbr"].stringValue
+        
+        let clockText: String
+        let attendanceText: String
+        switch gamesList[row]["statusNum"].intValue{
+        case 1:
+            clockText = gamesList[row]["startTimeEastern"].stringValue
+            attendanceText = "Pending"
+        case 2:
+            clockText = gamesList[row]["clock"].stringValue
+            attendanceText = gamesList[row]["attendance"].stringValue
+        default:
+            clockText = "Final"
+            attendanceText = gamesList[row]["attendance"].stringValue
+        }
+        
+        cell.gameClock?.text = clockText
+        cell.attendance?.text = "Attendance: " + attendanceText
 
-        let awayLogoURL = "https://cdn.nba.com/logos/nba/" + gamesList[row].awayTeamId + "/primary/L/logo.svg"
-        let awayURL = URL(string: awayLogoURL)
-        let awayData = try? Data(contentsOf: awayURL!)
-        cell.awayLogo.image = UIImage(data: awayData!)
-        
-        let homeLogoURL = "https://cdn.nba.com/logos/nba/" + gamesList[row].homeTeamId + "/primary/L/logo.svg"
-        let homeURL = URL(string: homeLogoURL)
-        let homeData = try? Data(contentsOf: homeURL!)
-        cell.homeLogo.image = UIImage(data: homeData!)
-        
         return cell
     }
 
     func fetchGames() {
-        let requestURL = "https://data.nba.net/data/10s/prod/v1/20211019//scoreboard.json"
+        let requestURL = "https://data.nba.net/data/10s/prod/v1/20211020//scoreboard.json"
         
         AF.request(requestURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let gamesData = JSON(value)
                 for game in 0...gamesData["numGames"].intValue - 1 {
-                    let gameData = gamesData["games"][game]
-
-                    let idInfo = gameData["gameId"].stringValue
-                    let arenaInfo = gameData["arena"]["name"].stringValue
-                    let clockInfo = gameData["clock"].stringValue
-                    let periodInfo = gameData["period"]["current"].stringValue
-                    let statusInfo = gameData["statusNum"].intValue
-                    
-                    let awayScoreInfo = gameData["vTeam"]["score"].stringValue
-                    let awayTeamInfo = gameData["vTeam"]["teamId"].stringValue
-                    let homeScoreInfo = gameData["hTeam"]["score"].stringValue
-                    let homeTeamInfo = gameData["hTeam"]["teamId"].stringValue
-
-                    let singleGame:Game = Game(gameId: idInfo, arena: arenaInfo, clock: clockInfo, period: periodInfo, gameStatus: statusInfo, awayScore: awayScoreInfo, awayTeamId: awayTeamInfo, homeScore: homeScoreInfo, homeTeamId: homeTeamInfo)
-
-                    self.gamesList.append(singleGame)
+                    self.gamesList.append(gamesData["games"][game])
                 }
             case .failure(let error):
                 print(error)
@@ -97,4 +108,5 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         format.dateFormat = "yyyyMMdd"
         return format.string(from: date)
     }
+    
 }

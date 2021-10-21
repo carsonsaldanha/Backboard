@@ -6,31 +6,28 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class Game {
     
     var gameId: String
-    var arena: String
+    var arena: JSON
+    var attendance: String
     var clock: String
     var period: String
     var gameStatus: Int
-    
-    var awayScore: String
-    var awayTeamId: String
-    var homeScore: String
-    var homeTeamId: String
-
+    var awayTeam: JSON
+    var homeTeam: JSON
     
     //Creates a pizza with the corresponding ingredients and specifications
-    init(gameId:String, arena:String, clock:String, period:String, gameStatus:Int, awayScore:String, awayTeamId:String, homeScore:String, homeTeamId:String){
+    init(gameId:String, arena:JSON, attendance: String, clock:String, period:String, gameStatus:Int, awayTeam:JSON, homeTeam:JSON){
         self.gameId = gameId
         self.arena = arena
+        self.attendance = attendance
         self.clock = clock
         self.period = period
         self.gameStatus = gameStatus
-        self.awayScore = awayScore
-        self.awayTeamId = awayTeamId
-        self.homeScore = homeScore
-        self.homeTeamId = homeTeamId
+        self.awayTeam = awayTeam
+        self.homeTeam = homeTeam
     }
 }
