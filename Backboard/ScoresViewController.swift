@@ -83,7 +83,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func fetchGames() {
-        let requestURL = "https://data.nba.net/data/10s/prod/v1/20211020//scoreboard.json"
+        let requestURL = "https://data.nba.net/data/10s/prod/v1/" + getTodaysDate() + "//scoreboard.json"
         
         AF.request(requestURL, method: .get).validate().responseJSON { response in
             switch response.result {
