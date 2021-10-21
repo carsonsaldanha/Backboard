@@ -10,10 +10,8 @@ import Alamofire
 import SwiftyJSON
 
 class NewsTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var articlePhotoImageView: UIImageView!
     @IBOutlet weak var articleTitleLabel: UILabel!
-    
 }
 
 class NewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
