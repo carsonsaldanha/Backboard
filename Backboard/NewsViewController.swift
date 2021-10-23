@@ -44,7 +44,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.articleTitleLabel?.text = articleTitles[row]
         let imageUrl = URL(string: articleImages[row])
         let data = try? Data(contentsOf: imageUrl!)
-        cell.articlePhotoImageView.image = UIImage(data: data!)
+        cell.articlePhotoImageView?.image = UIImage(data: data!)
         return cell
     }
     
@@ -62,7 +62,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
                       "domains=espn.com,cbssports.com,nbcsports.com,nba.com,bleacherreport.com" +
                       "from=" + getTodaysDate() + "&" +
                       "to=" + getTodaysDate() + "&" +
-                      "sortBy=popularity&" +
+                      "sortBy=publishedAt&" +
                       "apiKey=bd2de92e7e834d6481f1c8f279d4add0"
         AF.request(newsAPI, method: .get).validate().responseJSON { response in
             switch response.result {

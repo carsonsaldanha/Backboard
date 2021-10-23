@@ -25,6 +25,7 @@ class ScoresTableViewCell: UITableViewCell {
     @IBOutlet weak var attendance: UILabel!
     
     @IBOutlet weak var gameClock: UILabel!
+    
 }
 
 class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -87,7 +88,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Pulls NBA articles from the NBA data API and updates the table
     // Stores each game as a JSON since many variables within it will eventually need to be accessed
     func fetchGames() {
-        let requestURL = "https://data.nba.net/data/10s/prod/v1/" + getTodaysDate() + "//scoreboard.json"
+        let requestURL = "https://data.nba.net/data/10s/prod/v1/" + getTodaysDate() + "/scoreboard.json"
         
         AF.request(requestURL, method: .get).validate().responseJSON { response in
             switch response.result {
