@@ -42,9 +42,17 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: newsCellIdentifier, for: indexPath) as! NewsTableViewCell
         let row = indexPath.row
         cell.articleTitleLabel?.text = articleTitles[row]
-        let imageUrl = URL(string: articleImages[row])
-        let data = try? Data(contentsOf: imageUrl!)
-        cell.articlePhotoImageView?.image = UIImage(data: data!)
+        // Fetch and load the article image
+        let imageUrl = URL(string: articleImages[row])!
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: imageUrl) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        cell.articlePhotoImageView?.image = image
+                    }
+                }
+            }
+        }
         return cell
     }
     
