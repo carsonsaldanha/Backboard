@@ -21,6 +21,7 @@
 		DA93629C27161501000F00B7 /* HighlightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA93629B27161501000F00B7 /* HighlightsViewController.swift */; };
 		DA93629E27161521000F00B7 /* StandingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA93629D27161521000F00B7 /* StandingsViewController.swift */; };
 		DA9362A02716152E000F00B7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA93629F2716152E000F00B7 /* SettingsViewController.swift */; };
+		DABBF00C27345F210047E133 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBF00927345F210047E133 /* RadioButton.swift */; };
 		F213146527338766000CFF8E /* TeamLeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F213146427338766000CFF8E /* TeamLeaderView.swift */; };
 		F2131467273393BB000CFF8E /* TeamStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2131466273393BB000CFF8E /* TeamStatsCell.swift */; };
 		F247F2FE27331BBB00B9E2B7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */; };
@@ -48,6 +49,7 @@
 		DA93629B27161501000F00B7 /* HighlightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsViewController.swift; sourceTree = "<group>"; };
 		DA93629D27161521000F00B7 /* StandingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsViewController.swift; sourceTree = "<group>"; };
 		DA93629F2716152E000F00B7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		DABBF00927345F210047E133 /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		F213146427338766000CFF8E /* TeamLeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamLeaderView.swift; sourceTree = "<group>"; };
 		F2131466273393BB000CFF8E /* TeamStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamStatsCell.swift; sourceTree = "<group>"; };
 		F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				F2B2805C27337F6300D7D743 /* QuarterScoresCell.swift */,
 				F213146427338766000CFF8E /* TeamLeaderView.swift */,
 				F2131466273393BB000CFF8E /* TeamStatsCell.swift */,
+				DABBF00927345F210047E133 /* RadioButton.swift */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				DA936298271614AE000F00B7 /* ScoresViewController.swift in Sources */,
 				F247F30027331CFF00B9E2B7 /* ScoresTableViewCell.swift in Sources */,
 				DA936282271611D6000F00B7 /* AppDelegate.swift in Sources */,
+				DABBF00C27345F210047E133 /* RadioButton.swift in Sources */,
 				F2B2805D27337F6300D7D743 /* QuarterScoresCell.swift in Sources */,
 				F213146527338766000CFF8E /* TeamLeaderView.swift in Sources */,
 				F2131467273393BB000CFF8E /* TeamStatsCell.swift in Sources */,
