@@ -21,6 +21,9 @@
 		DA93629C27161501000F00B7 /* HighlightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA93629B27161501000F00B7 /* HighlightsViewController.swift */; };
 		DA93629E27161521000F00B7 /* StandingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA93629D27161521000F00B7 /* StandingsViewController.swift */; };
 		DA9362A02716152E000F00B7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA93629F2716152E000F00B7 /* SettingsViewController.swift */; };
+		F247F2FE27331BBB00B9E2B7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */; };
+		F247F30027331CFF00B9E2B7 /* ScoresTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F247F2FF27331CFF00B9E2B7 /* ScoresTableViewCell.swift */; };
+		F2BB0DBF27333BE400306208 /* GamePageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BB0DBE27333BE400306208 /* GamePageHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		DA93629B27161501000F00B7 /* HighlightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsViewController.swift; sourceTree = "<group>"; };
 		DA93629D27161521000F00B7 /* StandingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingsViewController.swift; sourceTree = "<group>"; };
 		DA93629F2716152E000F00B7 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		F247F2FF27331CFF00B9E2B7 /* ScoresTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresTableViewCell.swift; sourceTree = "<group>"; };
+		F2BB0DBE27333BE400306208 /* GamePageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePageHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 				DA936281271611D6000F00B7 /* AppDelegate.swift */,
 				DA936283271611D6000F00B7 /* SceneDelegate.swift */,
 				DA936285271611D6000F00B7 /* LogInViewController.swift */,
+				F247F2FF27331CFF00B9E2B7 /* ScoresTableViewCell.swift */,
 				DA93629527161474000F00B7 /* SignUpViewController.swift */,
 				DA936297271614AE000F00B7 /* ScoresViewController.swift */,
 				DA936299271614EE000F00B7 /* NewsViewController.swift */,
@@ -108,6 +115,8 @@
 				DA93628A271611D7000F00B7 /* Assets.xcassets */,
 				DA93628F271611D7000F00B7 /* Info.plist */,
 				641BAC5F271A05C6000A5C25 /* GoogleService-Info.plist */,
+				F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */,
+				F2BB0DBE27333BE400306208 /* GamePageHeader.swift */,
 			);
 			path = Backboard;
 			sourceTree = "<group>";
@@ -227,15 +236,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F247F2FE27331BBB00B9E2B7 /* GameViewController.swift in Sources */,
 				DA93629C27161501000F00B7 /* HighlightsViewController.swift in Sources */,
 				DA936286271611D6000F00B7 /* LogInViewController.swift in Sources */,
 				DA93629E27161521000F00B7 /* StandingsViewController.swift in Sources */,
 				DA936298271614AE000F00B7 /* ScoresViewController.swift in Sources */,
+				F247F30027331CFF00B9E2B7 /* ScoresTableViewCell.swift in Sources */,
 				DA936282271611D6000F00B7 /* AppDelegate.swift in Sources */,
 				DA93629A271614EE000F00B7 /* NewsViewController.swift in Sources */,
 				DA93629627161474000F00B7 /* SignUpViewController.swift in Sources */,
 				DA936284271611D6000F00B7 /* SceneDelegate.swift in Sources */,
 				DA9362A02716152E000F00B7 /* SettingsViewController.swift in Sources */,
+				F2BB0DBF27333BE400306208 /* GamePageHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

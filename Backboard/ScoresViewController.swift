@@ -9,31 +9,15 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ScoresTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var awayLogo: UIImageView!
-    @IBOutlet weak var homeLogo: UIImageView!
-    @IBOutlet weak var awayName: UILabel!
-    @IBOutlet weak var homeName: UILabel!
-    @IBOutlet weak var awayScore: UILabel!
-    @IBOutlet weak var homeScore: UILabel!
-    @IBOutlet weak var awayRecord: UILabel!
-    @IBOutlet weak var homeRecord: UILabel!
-    
-    @IBOutlet weak var arenaName: UILabel!
-    @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var attendance: UILabel!
-    
-    @IBOutlet weak var gameClock: UILabel!
-    
-}
-
 class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var scoresTableView: UITableView!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     var gamesList: [JSON] = []
+    var gameDate = Date()
     let scoreCellIdentifier = "Scores Cell"
+    let gameSegueIdentifier = "Game Segue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,13 +72,13 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Pulls NBA articles from the NBA data API and updates the table
     // Stores each game as a JSON since many variables within it will eventually need to be accessed
     func fetchGames() {
-        let requestURL = "https://data.nba.net/data/10s/prod/v1/" + getTodaysDate() + "/scoreboard.json"
+        let requestURL = "https://data.nba.net/data/10s/prod/v1/" + formatDate(date: gameDate) + "/scoreboard.json"
         
         AF.request(requestURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let gamesData = JSON(value)
-                for game in 0...gamesData["numGames"].intValue - 1 {
+                for game in 0..<gamesData["numGames"].intValue {
                     self.gamesList.append(gamesData["games"][game])
                 }
             case .failure(let error):
@@ -108,11 +92,24 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     // Helper function to get today's date for updated game info
-    private func getTodaysDate() -> String {
-        let date = Date()
+    private func formatDate(date: Date) -> String {
         let format = DateFormatter()
         format.dateFormat = "yyyyMMdd"
         return format.string(from: date)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == gameSegueIdentifier,
+           let destination = segue.destination as? GameViewController,
+           let gameIndex = scoresTableView.indexPathForSelectedRow?.row {
+            destination.gameID = gamesList[gameIndex]["gameID"].stringValue
+        }
+    }
+    
+    @IBAction func selectDate(_ sender: Any) {
+        gameDate = datePicker.date
+        gamesList = []
+        fetchGames()
+        scoresTableView.reloadData()
+    }
 }
