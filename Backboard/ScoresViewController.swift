@@ -25,6 +25,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIDatePicker.appearance().tintColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
         scoresTableView.delegate = self
         scoresTableView.dataSource = self
         fetchGames()

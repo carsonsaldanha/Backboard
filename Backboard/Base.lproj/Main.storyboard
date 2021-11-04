@@ -552,6 +552,7 @@
                                                     <outlet property="teamLogoImageView" destination="BYI-z0-8qK" id="IHk-Pp-D0b"/>
                                                     <outlet property="teamNameLabel" destination="VLr-8J-rBP" id="bC3-2c-I5v"/>
                                                     <outlet property="winRecordLabel" destination="3Qk-HS-WQD" id="sEf-Dp-bwc"/>
+                                                    <segue destination="m2T-O2-TG3" kind="show" identifier="Team Segue" id="bjO-9j-dBJ"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -1476,7 +1477,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KPu-hY-Oaw"/>
+        <segue reference="bjO-9j-dBJ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chart.bar" catalog="system" width="128" height="90"/>

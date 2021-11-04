@@ -36,6 +36,7 @@ class StandingsViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var standingsTableView: UITableView!
     
     let standingsCellIdentifier = "Standings Cell"
+    let teamSegueIdentifier = "Team Segue"
     var westStandings: [Team] = []
     var eastStandings: [Team] = []
     var westSelected = true
@@ -143,4 +144,15 @@ class StandingsViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == teamSegueIdentifier,
+           let destination = segue.destination as? TeamViewController,
+           let teamIndex = standingsTableView.indexPathForSelectedRow?.row {
+            if(westSelected){
+                destination.teamID = westStandings[teamIndex].teamID
+            }else{
+                destination.teamID = eastStandings[teamIndex].teamID
+            }
+        }
+    }
 }
