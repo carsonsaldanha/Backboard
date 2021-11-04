@@ -20,6 +20,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let rosterCellIdentifier = "Roster Cell"
     let statRankingCellIdentifier = "Stat Ranking"
+    let playerSegueIdentifier = "Player Segue"
 
     @IBOutlet weak var rosterTableView: UITableView!
     @IBOutlet weak var statRankingsTableView: UITableView!
@@ -173,6 +174,15 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
             return "3rd"
         default:
             return rank + "th"
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == playerSegueIdentifier,
+           let destination = segue.destination as? PlayerViewController,
+           let playerIndex = rosterTableView.indexPathForSelectedRow?.row {
+            destination.playerData = teamPlayerList[playerIndex]
+            destination.playerID = teamPlayerList[playerIndex]["personId"].stringValue
         }
     }
 }
