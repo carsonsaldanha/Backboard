@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-        let signupNavController = storyboard.instantiateViewController(identifier: "SignupController")
+        let signupNavController = storyboard.instantiateViewController(identifier: "LogInController")
         window?.rootViewController = signupNavController
     }
 

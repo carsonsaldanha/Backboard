@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.4)
+  - DLRadioButton (1.4.12)
   - Firebase/Auth (8.8.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 8.8.0)
@@ -49,12 +50,14 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.4)
+  - DLRadioButton (~> 1.4)
   - Firebase/Auth
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - DLRadioButton
     - Firebase
     - FirebaseAuth
     - FirebaseCore
@@ -68,6 +71,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
   Firebase: 629510f1a9ddb235f3a7c5c8ceb23ba887f0f814
   FirebaseAuth: bcf0adeff88bda5dcb3beeabe5760f1226ab7b2f
   FirebaseCore: 98b29e3828f0a53651c363937a7f7d92a19f1ba2
@@ -79,6 +83,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 0b0e028e8635f372aa20e686977ea043a33e9cdf
+PODFILE CHECKSUM: fa46b59d81a0cc04e796f94b770f7ef4f5fbe564
 
 COCOAPODS: 1.11.2

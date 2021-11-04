@@ -99,8 +99,13 @@ class LogInViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     // Go back to the signup page if the "Back" button is pressed
-    @IBAction func pressedBackButton(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+//    @IBAction func pressedBackButton(_ sender: Any) {
+//        self.navigationController?.popViewController(animated: true)
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        emailField.text = nil
+        passwordField.text = nil
     }
     
     // Hides the software keyboard when pressing return

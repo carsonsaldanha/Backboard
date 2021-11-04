@@ -11,7 +11,7 @@ import Firebase
 class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var logInButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var teamPickerView: UIPickerView!
@@ -37,7 +37,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         signUpButton.backgroundColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
         signUpButton.layer.cornerRadius = 25.0
         signUpButton.tintColor = UIColor.white
-        logInButton.tintColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
+        backButton.tintColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
         
         // Moves to the tab bar controller if we sucessfully sign up
         Auth.auth().addStateDidChangeListener { auth, user in
@@ -105,6 +105,10 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         emailField.text = nil
         passwordField.text = nil
+    }
+    
+    @IBAction func pressedBackButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     // Hides the software keyboard when pressing return
