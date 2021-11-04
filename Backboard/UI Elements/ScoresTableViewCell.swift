@@ -10,8 +10,9 @@ import UIKit
 
 class ScoresTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var awayLogo: UIImageView!
-    @IBOutlet weak var homeLogo: UIImageView!
+
+    @IBOutlet weak var awayLogo: UIButton!
+    @IBOutlet weak var homeLogo: UIButton!
     @IBOutlet weak var awayName: UILabel!
     @IBOutlet weak var homeName: UILabel!
     @IBOutlet weak var awayScore: UILabel!

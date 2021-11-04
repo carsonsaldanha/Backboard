@@ -16,8 +16,12 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var gamesList: [JSON] = []
     var gameDate = Date()
+    var selectedTeamID = String()
+    
     let scoreCellIdentifier = "Scores Cell"
     let gameSegueIdentifier = "Game Segue"
+    let awayTeamSegueIdentifier = "Away Team Segue"
+    let homeTeamSegueIdentifier = "Home Team Segue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +47,14 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.awayRecord?.text = gamesList[row]["vTeam"]["win"].stringValue + "-" + gamesList[row]["vTeam"]["loss"].stringValue
         cell.homeRecord?.text = gamesList[row]["hTeam"]["win"].stringValue + "-" + gamesList[row]["hTeam"]["loss"].stringValue
         
-        cell.awayLogo.image = UIImage(named: gamesList[row]["vTeam"]["teamId"].stringValue)
-        cell.homeLogo.image = UIImage(named: gamesList[row]["hTeam"]["teamId"].stringValue)
+        cell.awayLogo.setImage(UIImage(named: gamesList[row]["vTeam"]["teamId"].stringValue), for: .normal)
+        cell.homeLogo.setImage(UIImage(named: gamesList[row]["hTeam"]["teamId"].stringValue), for: .normal)
+        cell.awayLogo.tag = row
+        cell.homeLogo.tag = row
         
         cell.arenaName?.text = gamesList[row]["arena"]["name"].stringValue
         cell.location?.text = gamesList[row]["arena"]["city"].stringValue + ", " + gamesList[row]["arena"]["stateAbbr"].stringValue
-        
+                
         let clockText: String
         let attendanceText: String
         switch gamesList[row]["statusNum"].intValue{
@@ -104,6 +110,16 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
            let gameIndex = scoresTableView.indexPathForSelectedRow?.row {
             destination.gameID = gamesList[gameIndex]["gameId"].stringValue
             destination.gameDate = formatDate(date: gameDate)
+        }
+        else if segue.identifier == awayTeamSegueIdentifier,
+            let destination = segue.destination as? TeamViewController,
+            let tappedButton = sender as? UIButton {
+            destination.teamID = gamesList[tappedButton.tag]["vTeam"]["teamId"].stringValue
+        }
+        else if segue.identifier == homeTeamSegueIdentifier,
+            let destination = segue.destination as? TeamViewController,
+            let tappedButton = sender as? UIButton {
+            destination.teamID = gamesList[tappedButton.tag]["hTeam"]["teamId"].stringValue
         }
     }
     
