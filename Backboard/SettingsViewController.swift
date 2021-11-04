@@ -100,19 +100,16 @@ class SettingsViewController: UIViewController {
             return UIScreen.main.traitCollection.userInterfaceStyle
         }
         
-        overrideUserInterfaceStyle = osTheme
         updateView = osTheme
     }
     
     //change the current view controller to light mode
     @IBAction func pressedLightButton(_ sender: Any) {
-        overrideUserInterfaceStyle = .light
         updateView = .light
     }
     
     //change current view controller to dark mode
     @IBAction func pressedDarkButton(_ sender: Any) {
-        overrideUserInterfaceStyle = .dark
         updateView = .dark
     }
     
