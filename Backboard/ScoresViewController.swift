@@ -102,7 +102,8 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if segue.identifier == gameSegueIdentifier,
            let destination = segue.destination as? GameViewController,
            let gameIndex = scoresTableView.indexPathForSelectedRow?.row {
-            destination.gameID = gamesList[gameIndex]["gameID"].stringValue
+            destination.gameID = gamesList[gameIndex]["gameId"].stringValue
+            destination.gameDate = formatDate(date: gameDate)
         }
     }
     
