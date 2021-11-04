@@ -16,7 +16,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var teamPickerView: UIPickerView!
     
-    var teams: [String] = ["76ers", "Bucks", "Bulls", "Cavaliers", "Celtics", "Clippers",
+    var teams: [String] = ["None", "76ers", "Bucks", "Bulls", "Cavaliers", "Celtics", "Clippers",
                            "Grizzlies", "Hawks", "Heat", "Hornets", "Jazz", "Kings",
                            "Knicks", "Lakers", "Magic", "Mavericks", "Nets", "Nuggets",
                            "Pacers", "Pelicans", "Pistons", "Raptors", "Rockets", "Spurs",
@@ -24,6 +24,10 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the delegate and data source of the picker to self
+        teamPickerView.delegate = self
+        teamPickerView.dataSource = self
         
         // Used to hide the software keyboard
         emailField.delegate = self
@@ -34,9 +38,6 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         signUpButton.layer.cornerRadius = 25.0
         signUpButton.tintColor = UIColor.white
         logInButton.tintColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
-        
-        teamPickerView.delegate = self
-        teamPickerView.dataSource = self
         
         // Moves to the tab bar controller if we sucessfully sign up
         Auth.auth().addStateDidChangeListener { auth, user in
@@ -67,6 +68,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         return teams[row]
     }
 
+    // Uses Firebase authentication to sign up a user upon button press
     @IBAction func pressedSignUp(_ sender: Any) {
         // Checks if the email and password texts are filled
         guard let email = emailField.text,
@@ -91,6 +93,13 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 self.present(alert, animated: true, completion: nil)
             }
         }
+        
+        // Define a key and value for the user's favorite team
+        let kFavoriteTeamKey = "favoriteTeam"
+        let team = teams[teamPickerView.selectedRow(inComponent: 0)]
+        // Get a reference to the global user defaults object and store the user's favorite team
+        let defaults = UserDefaults.standard
+        defaults.set(team, forKey: kFavoriteTeamKey)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

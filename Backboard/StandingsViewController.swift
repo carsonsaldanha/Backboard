@@ -99,6 +99,24 @@ class StandingsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // Sets a cell in the table with the name, logo, record, and number of games behind for a conference team
     private func setCells(cell: StandingsTableViewCell, row: Int, conferenceStandings: [Team]) {
+        // Retrive the user's favorite team
+        let defaults = UserDefaults.standard
+        let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
+        // If this cell is the user's favorite team, set all the labels to bold for better visibility
+        if (conferenceStandings[row].name == retrievedFavoriteTeam) {
+            cell.seedingNumberLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+            cell.teamNameLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+            cell.winRecordLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+            cell.lossRecordLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+            cell.gamesBehindLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+        } else {
+            cell.seedingNumberLabel?.font = UIFont.systemFont(ofSize: 17.0)
+            cell.teamNameLabel?.font = UIFont.systemFont(ofSize: 17.0)
+            cell.winRecordLabel?.font = UIFont.systemFont(ofSize: 17.0)
+            cell.lossRecordLabel?.font = UIFont.systemFont(ofSize: 17.0)
+            cell.gamesBehindLabel?.font = UIFont.systemFont(ofSize: 17.0)
+        }
+        
         cell.teamNameLabel?.text = conferenceStandings[row].name
         cell.teamLogoImageView?.image = UIImage(named: conferenceStandings[row].teamID)
         cell.winRecordLabel?.text = conferenceStandings[row].winRecord

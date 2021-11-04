@@ -8,15 +8,26 @@
 import UIKit
 import Firebase
 
-class LogInViewController: UIViewController, UITextFieldDelegate {
+class LogInViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var teamPickerView: UIPickerView!
+    
+    var teams: [String] = ["None", "76ers", "Bucks", "Bulls", "Cavaliers", "Celtics", "Clippers",
+                           "Grizzlies", "Hawks", "Heat", "Hornets", "Jazz", "Kings",
+                           "Knicks", "Lakers", "Magic", "Mavericks", "Nets", "Nuggets",
+                           "Pacers", "Pelicans", "Pistons", "Raptors", "Rockets", "Spurs",
+                           "Suns", "Thunder", "Timberwolves", "Trail Blazers", "Warriors", "Wizards"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the delegate and data source of the picker to self
+        teamPickerView.delegate = self
+        teamPickerView.dataSource = self
         
         // Used to hide the software keyboard
         emailField.delegate = self
@@ -42,6 +53,22 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // Number of columns in picker
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // Number of rows of data for picker
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return teams.count
+    }
+    
+    // Returns the team for the row and component (column) on the picker
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return teams[row]
+    }
+    
+    // Uses Firebase authentication to log in a user upon button press
     @IBAction func pressedLogIn(_ sender: Any) {
         // Checks if the email and password texts are filled
         guard let email = emailField.text,
@@ -62,6 +89,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                 self.present(alert, animated: true, completion: nil)
             }
         }
+        
+        // Define a key and value for the user's favorite team
+        let kFavoriteTeamKey = "favoriteTeam"
+        let team = teams[teamPickerView.selectedRow(inComponent: 0)]
+        // Get a reference to the global user defaults object and store the user's favorite team
+        let defaults = UserDefaults.standard
+        defaults.set(team, forKey: kFavoriteTeamKey)
     }
     
     // Go back to the signup page if the "Back" button is pressed
