@@ -98,11 +98,6 @@ class LogInViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         defaults.set(team, forKey: kFavoriteTeamKey)
     }
     
-    // Go back to the signup page if the "Back" button is pressed
-//    @IBAction func pressedBackButton(_ sender: Any) {
-//        self.navigationController?.popViewController(animated: true)
-//    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         emailField.text = nil
         passwordField.text = nil

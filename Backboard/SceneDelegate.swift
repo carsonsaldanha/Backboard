@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -19,9 +20,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-        let signupNavController = storyboard.instantiateViewController(identifier: "LogInController")
-        window?.rootViewController = signupNavController
+        
+        //gets current user
+        let user = Auth.auth().currentUser;
+        
+        //checks if we are logged in
+        if user == nil {
+            //we are not logged in, go to login VC
+            let signupNavController = storyboard.instantiateViewController(identifier: "LogInController")
+            window?.rootViewController = signupNavController
+        }
+        else {
+            //we are logged in, got to Scores VC
+            let signupNavController = storyboard.instantiateViewController(identifier: "TabBarController")
+            window?.rootViewController = signupNavController
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
