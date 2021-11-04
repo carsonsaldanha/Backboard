@@ -8,12 +8,19 @@
 import UIKit
 import Firebase
 
-class SignUpViewController: UIViewController, UITextFieldDelegate {
+class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var teamPickerView: UIPickerView!
+    
+    var teams: [String] = ["76ers", "Bucks", "Bulls", "Cavaliers", "Celtics", "Clippers",
+                           "Grizzlies", "Hawks", "Heat", "Hornets", "Jazz", "Kings",
+                           "Knicks", "Lakers", "Magic", "Mavericks", "Nets", "Nuggets",
+                           "Pacers", "Pelicans", "Pistons", "Raptors", "Rockets", "Spurs",
+                           "Suns", "Thunder", "Timberwolves", "Trail Blazers", "Warriors", "Wizards"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +35,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         signUpButton.tintColor = UIColor.white
         logInButton.tintColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
         
+        teamPickerView.delegate = self
+        teamPickerView.dataSource = self
+        
         // Moves to the tab bar controller if we sucessfully sign up
         Auth.auth().addStateDidChangeListener { auth, user in
             if (user != nil) {
@@ -41,7 +51,22 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+
+    // Number of columns in picker
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    // Number of rows of data for picker
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return teams.count
+    }
+    
+    // Returns the team for the row and component (column) on the picker
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return teams[row]
+    }
+
     @IBAction func pressedSignUp(_ sender: Any) {
         // Checks if the email and password texts are filled
         guard let email = emailField.text,
