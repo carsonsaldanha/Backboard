@@ -50,6 +50,8 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.awayLogo.setImage(UIImage(named: gamesList[row]["vTeam"]["teamId"].stringValue), for: .normal)
         cell.homeLogo.setImage(UIImage(named: gamesList[row]["hTeam"]["teamId"].stringValue), for: .normal)
+        
+        // Sets tags for images (which are buttons) to allow us to segue to team pages
         cell.awayLogo.tag = row
         cell.homeLogo.tag = row
         
@@ -112,6 +114,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
             destination.gameID = gamesList[gameIndex]["gameId"].stringValue
             destination.gameDate = formatDate(date: gameDate)
         }
+        // Segues to team pages based on chosen team
         else if segue.identifier == awayTeamSegueIdentifier,
             let destination = segue.destination as? TeamViewController,
             let tappedButton = sender as? UIButton {

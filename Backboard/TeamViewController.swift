@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+// Represents a screen with detailed team information
 class TeamViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var teamID = String()
@@ -35,6 +36,8 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         fetchTeam()
     }
     
+    // Fetches team information, current standings, current roster, and team stats from API
+    // Also loads visual data after data has been fetched
     func fetchTeam() {
         let infoURL = "https://data.nba.net/data/10s/prod/v1/2021/teams.json"
         AF.request(infoURL, method: .get).validate().responseJSON { response in
@@ -105,6 +108,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // Displays header info by loading from API
     func loadHeader() {
         teamHeader.teamLogo.image = UIImage(named: teamID)
         teamHeader.teamName.text = teamInfoData["fullName"].stringValue
@@ -112,6 +116,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         teamHeader.teamDiv.text = teamInfoData["divName"].stringValue + " Division"
     }
     
+    // Displays standings info by loading from API
     func loadStandings() {
         let formattedConf = formatRank(rank: teamStandingData["confRank"].stringValue)
         let formattedDiv = formatRank(rank: teamStandingData["divRank"].stringValue)
@@ -122,10 +127,12 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         teamHeader.teamStreak.text = "Streak: " + teamStandingData["teamSitesOnly"]["streakText"].stringValue
     }
     
+    // Specifices table length for either roster or stats tables
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (tableView == rosterTableView ? teamPlayerList.count : teamStatsList.count)
     }
     
+    // Displays corresponidng data for either roster or stats cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
         if tableView == rosterTableView {
@@ -148,6 +155,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // Appends stat data for table view; includes a string for display formatting
     func loadStatRankings() {
         teamStatsList.append(("PPG", teamRankData["ppg"]))
         teamStatsList.append(("FGP", teamRankData["fgp"]))
@@ -164,6 +172,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         teamStatsList.append(("EFF", teamRankData["eff"]))
     }
     
+    // Formats a ranking from a given number
     func formatRank(rank: String) -> String{
         switch rank {
         case "1":
@@ -177,6 +186,7 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // Segues to Player VC based on roster table view selection
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == playerSegueIdentifier,
            let destination = segue.destination as? PlayerViewController,

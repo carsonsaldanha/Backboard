@@ -24,6 +24,7 @@
 		DABBF00C27345F210047E133 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBF00927345F210047E133 /* RadioButton.swift */; };
 		F213146527338766000CFF8E /* TeamLeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F213146427338766000CFF8E /* TeamLeaderView.swift */; };
 		F2131467273393BB000CFF8E /* TeamStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2131466273393BB000CFF8E /* TeamStatsCell.swift */; };
+		F23BB18E2734AE0B00769F68 /* PlayerStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23BB18D2734AE0B00769F68 /* PlayerStatsCell.swift */; };
 		F245276927349B70008A2536 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F245276827349B70008A2536 /* PlayerViewController.swift */; };
 		F245276B27349DFF008A2536 /* PlayerPageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F245276A27349DFF008A2536 /* PlayerPageHeader.swift */; };
 		F247F2FE27331BBB00B9E2B7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */; };
@@ -58,6 +59,7 @@
 		DABBF00927345F210047E133 /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		F213146427338766000CFF8E /* TeamLeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamLeaderView.swift; sourceTree = "<group>"; };
 		F2131466273393BB000CFF8E /* TeamStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamStatsCell.swift; sourceTree = "<group>"; };
+		F23BB18D2734AE0B00769F68 /* PlayerStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsCell.swift; sourceTree = "<group>"; };
 		F245276827349B70008A2536 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		F245276A27349DFF008A2536 /* PlayerPageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPageHeader.swift; sourceTree = "<group>"; };
 		F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				F2A1D2372734938900DDA27D /* RosterPlayerCell.swift */,
 				F2A1D23B273497B700DDA27D /* TeamRankingsCell.swift */,
 				F245276A27349DFF008A2536 /* PlayerPageHeader.swift */,
+				F23BB18D2734AE0B00769F68 /* PlayerStatsCell.swift */,
 			);
 			path = "UI Elements";
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				F245276927349B70008A2536 /* PlayerViewController.swift in Sources */,
 				DA936284271611D6000F00B7 /* SceneDelegate.swift in Sources */,
 				DA9362A02716152E000F00B7 /* SettingsViewController.swift in Sources */,
+				F23BB18E2734AE0B00769F68 /* PlayerStatsCell.swift in Sources */,
 				F2B2805B27336F0800D7D743 /* GamePageHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

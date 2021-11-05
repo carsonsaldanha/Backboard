@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+// Represents a detailed screen of game info
 class GameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var gameID = String()
@@ -39,6 +40,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         fetchGame()
     }
     
+    // Fetches game JSON and calls corresponding load methods
     func fetchGame() {
         let requestURL = "https://data.nba.net/data/10s/prod/v1/" + gameDate + "/" + gameID + "_boxscore.json"
         AF.request(requestURL, method: .get).validate().responseJSON { response in
@@ -59,10 +61,12 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // Sets length for either the quarter table or statistics table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (tableView == quartersTableView ? 2 : awayStats.count)
     }
     
+    // Fills out either quarter table cells or team stats cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
         if tableView == quartersTableView {
@@ -70,7 +74,8 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
             let chosenTeam = row == 0 ? "vTeam" : "hTeam"
             let gameInfo = gameData["basicGameData"]
             let scoresInfo = gameInfo[chosenTeam]["linescore"]
-                    
+            
+            // Sets quarter score values
             quarterCell.firstScore.text = scoresInfo[0]["score"].stringValue
             quarterCell.secondScore.text = scoresInfo[1]["score"].stringValue
             quarterCell.thirdScore.text = scoresInfo[2]["score"].stringValue
@@ -88,6 +93,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // Sets the leaderStatistic value based on segment selection; reloads game leader info from API
     @IBAction func selectedLeaderStat(_ sender: Any) {
         switch teamLeaderSegment.selectedSegmentIndex {
         case 0:
@@ -102,6 +108,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         loadLeaders()
     }
     
+    // Loads all header data from game JSON
     func loadHeader() {
         let gameInfo = gameData["basicGameData"]
         
@@ -123,6 +130,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         homeStatsLogo.image = UIImage(named: gameInfo["hTeam"]["teamId"].stringValue)
     }
     
+    // Loads all header data from game JSON
     func loadLeaders(){
         let statInfo = gameData["stats"]
         let awayPlayer = statInfo["vTeam"]["leaders"][leaderStat]["players"][0]
@@ -145,6 +153,7 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         teamLeaders.homePlayerValue.text = statInfo["hTeam"]["leaders"][leaderStat]["value"].stringValue
     }
     
+    // Loads team stats for home/away teams as well as a formatted string for display
     func loadTeamStats(chosenTeam: String) {
         var statList: [(String, JSON)] = []
         let teamStatInfo = gameData["stats"][chosenTeam]
