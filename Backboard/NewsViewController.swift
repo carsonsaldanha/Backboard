@@ -67,7 +67,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func fetchArticles() {
         let newsAPI = "https://newsapi.org/v2/everything?" +
                       "q=nba&" +
-                      "domains=espn.com,cbssports.com,nbcsports.com,nba.com,bleacherreport.com" +
+                      "domains=espn.com,cbssports.com,nbcsports.com,nba.com,bleacherreport.com,sports.yahoo.com" +
                       "from=" + getTodaysDate() + "&" +
                       "to=" + getTodaysDate() + "&" +
                       "sortBy=publishedAt&" +

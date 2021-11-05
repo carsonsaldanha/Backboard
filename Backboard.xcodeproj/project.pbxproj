@@ -130,6 +130,8 @@
 				DA936285271611D6000F00B7 /* LogInViewController.swift */,
 				DA93629527161474000F00B7 /* SignUpViewController.swift */,
 				DA936297271614AE000F00B7 /* ScoresViewController.swift */,
+				F2A1D2332734920500DDA27D /* TeamViewController.swift */,
+				F245276827349B70008A2536 /* PlayerViewController.swift */,
 				F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */,
 				DA936299271614EE000F00B7 /* NewsViewController.swift */,
 				DA93629B27161501000F00B7 /* HighlightsViewController.swift */,
@@ -138,8 +140,6 @@
 				DA93628A271611D7000F00B7 /* Assets.xcassets */,
 				DA93628F271611D7000F00B7 /* Info.plist */,
 				641BAC5F271A05C6000A5C25 /* GoogleService-Info.plist */,
-				F2A1D2332734920500DDA27D /* TeamViewController.swift */,
-				F245276827349B70008A2536 /* PlayerViewController.swift */,
 			);
 			path = Backboard;
 			sourceTree = "<group>";
