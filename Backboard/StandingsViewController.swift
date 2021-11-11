@@ -144,15 +144,17 @@ class StandingsViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
+    // Segues into the Team VC if a row is selected in the table
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == teamSegueIdentifier,
            let destination = segue.destination as? TeamViewController,
            let teamIndex = standingsTableView.indexPathForSelectedRow?.row {
-            if(westSelected){
+            if (westSelected) {
                 destination.teamID = westStandings[teamIndex].teamID
-            }else{
+            } else {
                 destination.teamID = eastStandings[teamIndex].teamID
             }
         }
     }
+    
 }
