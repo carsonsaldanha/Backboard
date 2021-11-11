@@ -94,12 +94,14 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             }
         }
         
-        // Define a key and value for the user's favorite team
+        // Define a key and value for the user's favorite team and notification state
         let kFavoriteTeamKey = "favoriteTeam"
+        let kNotificationsKey = "notifications"
         let team = teams[teamPickerView.selectedRow(inComponent: 0)]
-        // Get a reference to the global user defaults object and store the user's favorite team
+        // Get a reference to the global user defaults object and store the user's favorite team and set notification state to off
         let defaults = UserDefaults.standard
         defaults.set(team, forKey: kFavoriteTeamKey)
+        defaults.set(false, forKey: kNotificationsKey)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

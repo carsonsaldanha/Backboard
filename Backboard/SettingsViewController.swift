@@ -9,18 +9,22 @@ import UIKit
 import Firebase
 import DLRadioButton
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate {
 
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var favoriteTeamLabel: UILabel!
+    @IBOutlet weak var notificationsSwitch: UISwitch!
+    
     var currentView: UIUserInterfaceStyle!
     var updateView: UIUserInterfaceStyle!
     var pressedSave = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UNUserNotificationCenter.current().delegate = self
 
         // Do any additional setup after loading the view.
         // Design for the saveButton
@@ -39,59 +43,51 @@ class SettingsViewController: UIViewController {
         let defaults = UserDefaults.standard
         let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
         
-        favoriteTeamLabel.text! = retrievedFavoriteTeam!
+        favoriteTeamLabel.text? = retrievedFavoriteTeam ?? "None"
         
         //adds the lines dynamically
         let lineView = UIView(frame: CGRect(x: 20, y: 190, width: 390, height: 1))
         lineView.layer.borderWidth = 1.0
-        lineView.layer.borderColor = UIColor.black.cgColor
+        lineView.layer.borderColor = UIColor.gray.cgColor
         self.view.addSubview(lineView)
         
         let lineView2 = UIView(frame: CGRect(x: 20, y: 235, width: 390, height: 1))
         lineView2.layer.borderWidth = 1.0
-        lineView2.layer.borderColor = UIColor.black.cgColor
+        lineView2.layer.borderColor = UIColor.gray.cgColor
         self.view.addSubview(lineView2)
         
         let lineView3 = UIView(frame: CGRect(x: 20, y: 285, width: 390, height: 1))
         lineView3.layer.borderWidth = 1.0
-        lineView3.layer.borderColor = UIColor.black.cgColor
+        lineView3.layer.borderColor = UIColor.gray.cgColor
         self.view.addSubview(lineView3)
         
         let lineView4 = UIView(frame: CGRect(x: 87, y: 340, width: 325, height: 1))
         lineView4.layer.borderWidth = 1.0
-        lineView4.layer.borderColor = UIColor.black.cgColor
+        lineView4.layer.borderColor = UIColor.gray.cgColor
         self.view.addSubview(lineView4)
         
         let lineView5 = UIView(frame: CGRect(x: 87, y: 390, width: 325, height: 1))
         lineView5.layer.borderWidth = 1.0
-        lineView5.layer.borderColor = UIColor.black.cgColor
+        lineView5.layer.borderColor = UIColor.gray.cgColor
         self.view.addSubview(lineView5)
         
         let lineView6 = UIView(frame: CGRect(x: 87, y: 440, width: 325, height: 1))
         lineView6.layer.borderWidth = 1.0
-        lineView6.layer.borderColor = UIColor.black.cgColor
+        lineView6.layer.borderColor = UIColor.gray.cgColor
         self.view.addSubview(lineView6)
-        
-        let lineView7 = UIView(frame: CGRect(x: 20, y: 490, width: 390, height: 1))
-        lineView7.layer.borderWidth = 1.0
-        lineView7.layer.borderColor = UIColor.black.cgColor
-        self.view.addSubview(lineView7)
-        
-        let lineView8 = UIView(frame: CGRect(x: 87, y: 545, width: 325, height: 1))
-        lineView8.layer.borderWidth = 1.0
-        lineView8.layer.borderColor = UIColor.black.cgColor
-        self.view.addSubview(lineView8)
-        
-        let lineView9 = UIView(frame: CGRect(x: 87, y: 595, width: 325, height: 1))
-        lineView9.layer.borderWidth = 1.0
-        lineView9.layer.borderColor = UIColor.black.cgColor
-        self.view.addSubview(lineView9)
         
         //returns and stores the current display mode of the phone
         var osTheme: UIUserInterfaceStyle {
             return UIScreen.main.traitCollection.userInterfaceStyle
         }
         currentView = osTheme
+        
+        let retrievedNotificationState = defaults.bool(forKey: "notifications")
+        if (retrievedNotificationState == false) {
+            notificationsSwitch.isOn = false
+        } else {
+            notificationsSwitch.isOn = true
+        }
     }
     
     //change the current view controller to the phone's current mode
@@ -113,14 +109,25 @@ class SettingsViewController: UIViewController {
         updateView = .dark
     }
     
-    //notifications for all teams
-    @IBAction func pressedAllTeams(_ sender: Any) {
-        
-    }
-    
-    //notifications for our favorite team only
-    @IBAction func pressedFavoriteTeam(_ sender: Any) {
-        
+    // Update the notification user default state to set the toggle based on it
+    @IBAction func notificationsSwitchToggled(_ sender: Any) {
+        if (notificationsSwitch.isOn) {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert]) { (granted, error) in
+                if granted {
+                    UserDefaults.standard.set(true, forKey: "notifications")
+                    print("Permission was granted.")
+                } else {
+                    UserDefaults.standard.set(false, forKey: "notifications")
+                    DispatchQueue.main.async {
+                        self.notificationsSwitch.isOn = false
+                    }
+                    print("Permission was denied or there was an error: ", error as Any)
+                }
+            }
+        } else {
+            UserDefaults.standard.set(false, forKey: "notifications")
+        }
     }
     
     //save changes if we press the save button

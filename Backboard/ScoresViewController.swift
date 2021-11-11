@@ -29,6 +29,41 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         scoresTableView.delegate = self
         scoresTableView.dataSource = self
         fetchGames()
+        
+        let defaults = UserDefaults.standard
+        let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
+        let retrievedNotificationState = defaults.bool(forKey: "notifications")
+        if (retrievedNotificationState == true) {            
+            // Create an object that holds the data for our notification
+            let notification = UNMutableNotificationContent()
+            notification.title = "Rockets vs Nets"
+            notification.subtitle = "7:00 PM"
+            notification.body = "ESPN"
+            
+            let gregorian = Calendar(identifier: .gregorian)
+            let now = Date()
+            var components = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: now)
+            components.hour = 16
+            components.minute = 8
+            components.second = 0
+            let date = gregorian.date(from: components)!
+            let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second,], from: date)
+            let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+            
+            // Set up a request to tell iOS to submit the notification with that trigger
+            let request = UNNotificationRequest(identifier: "notificationId",
+                                                content: notification,
+                                                trigger: notificationTrigger)
+            
+            // Submit the request to iOS
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print("Request error: ", error as Any)
+                } else {
+                    print("Submitted notification")
+                }
+            }
+        }
     }
     
     // Returns the number of games in the table
