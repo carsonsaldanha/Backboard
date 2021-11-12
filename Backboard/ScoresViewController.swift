@@ -239,6 +239,6 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         gamesList = []
         changedDate = true
         fetchGames()
-//        scoresTableView.reloadData()
     }
+
 }
