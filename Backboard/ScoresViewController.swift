@@ -17,6 +17,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var gamesList: [JSON] = []
     var gameDate = Date()
     var selectedTeamID = String()
+    var changedDate = false
     let teamNamesDictonary = [
         "ATL" : "Hawks",
         "BKN" : "Nets",
@@ -127,7 +128,9 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // Reload the table after the API request is compelete
             DispatchQueue.main.async {
                 self.scoresTableView.reloadData()
-                self.pushNotification()
+                if (!self.changedDate) {
+                    self.pushNotification()
+                }
             }
         }
     }
@@ -234,7 +237,8 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func selectDate(_ sender: Any) {
         gameDate = datePicker.date
         gamesList = []
+        changedDate = true
         fetchGames()
-        scoresTableView.reloadData()
+//        scoresTableView.reloadData()
     }
 }
