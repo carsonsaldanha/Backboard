@@ -17,6 +17,38 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var gamesList: [JSON] = []
     var gameDate = Date()
     var selectedTeamID = String()
+    let teamNamesDictonary = [
+        "ATL" : "Hawks",
+        "BKN" : "Nets",
+        "BOS" : "Celtics",
+        "CHA" : "Hornets",
+        "CHI" : "Bulls",
+        "CLE" : "Cavaliers",
+        "DAL" : "Mavericks",
+        "DEN" : "Nuggets",
+        "DET" : "Pistons",
+        "GSW" : "Warriors",
+        "HOU" : "Rockets",
+        "IND" : "Pacers",
+        "LAC" : "Clippers",
+        "LAL" : "Lakers",
+        "MEM" : "Grizzlies",
+        "MIA" : "Heat",
+        "MIL" : "Bucks",
+        "MIN" : "Timberwolves",
+        "NOP" : "Pelicans",
+        "NYK" : "Knicks",
+        "OKC" : "Thunder",
+        "ORL" : "Magic",
+        "PHI" : "76ers",
+        "PHX" : "Suns",
+        "POR" : "Trail Blazers",
+        "SAC" : "Kings",
+        "SAS" : "Spurs",
+        "TOR" : "Raptors",
+        "UTA" : "Jazz",
+        "WAS" : "Wizards"
+    ]
     
     let scoreCellIdentifier = "Scores Cell"
     let gameSegueIdentifier = "Game Segue"
@@ -29,41 +61,6 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         scoresTableView.delegate = self
         scoresTableView.dataSource = self
         fetchGames()
-        
-        let defaults = UserDefaults.standard
-        let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
-        let retrievedNotificationState = defaults.bool(forKey: "notifications")
-        if (retrievedNotificationState == true) {            
-            // Create an object that holds the data for our notification
-            let notification = UNMutableNotificationContent()
-            notification.title = "Rockets vs Nets"
-            notification.subtitle = "7:00 PM"
-            notification.body = "ESPN"
-            
-            let gregorian = Calendar(identifier: .gregorian)
-            let now = Date()
-            var components = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: now)
-            components.hour = 16
-            components.minute = 8
-            components.second = 0
-            let date = gregorian.date(from: components)!
-            let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second,], from: date)
-            let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
-            
-            // Set up a request to tell iOS to submit the notification with that trigger
-            let request = UNNotificationRequest(identifier: "notificationId",
-                                                content: notification,
-                                                trigger: notificationTrigger)
-            
-            // Submit the request to iOS
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error = error {
-                    print("Request error: ", error as Any)
-                } else {
-                    print("Submitted notification")
-                }
-            }
-        }
     }
     
     // Returns the number of games in the table
@@ -97,7 +94,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let attendanceText: String
         switch gamesList[row]["statusNum"].intValue{
         case 1:
-            clockText = gamesList[row]["startTimeEastern"].stringValue
+            clockText = convertUTCtoLocal(utcTime: gamesList[row]["startTimeUTC"].stringValue)
             attendanceText = "Pending"
         case 2:
             clockText = gamesList[row]["clock"].stringValue
@@ -117,7 +114,6 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // Stores each game as a JSON since many variables within it will eventually need to be accessed
     func fetchGames() {
         let requestURL = "https://data.nba.net/data/10s/prod/v1/" + formatDate(date: gameDate) + "/scoreboard.json"
-        
         AF.request(requestURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -131,6 +127,66 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // Reload the table after the API request is compelete
             DispatchQueue.main.async {
                 self.scoresTableView.reloadData()
+                self.pushNotification()
+            }
+        }
+    }
+    
+    // Sends a notification at 5:00 PM with the details for the game of the user's favorite team
+    func pushNotification() {
+        let defaults = UserDefaults.standard
+        let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
+        let retrievedNotificationState = defaults.bool(forKey: "notifications")
+        var hasGame = false
+        var awayTeam = ""
+        var homeTeam = ""
+        var gameTime = ""
+        var tvChannel = ""
+        // Proceed if the user has granted notifications
+        if (retrievedNotificationState == true) {
+            // Check if the user's favorite team is playing today and store the game details
+            for game in 0..<gamesList.count {
+                awayTeam = teamNamesDictonary[gamesList[game]["vTeam"]["triCode"].stringValue] ?? ""
+                homeTeam = teamNamesDictonary[gamesList[game]["hTeam"]["triCode"].stringValue] ?? ""
+                if (awayTeam == retrievedFavoriteTeam || homeTeam == retrievedFavoriteTeam) {
+                    hasGame = true
+                    gameTime = convertUTCtoLocal(utcTime: gamesList[game]["startTimeUTC"].stringValue)
+                    tvChannel = gamesList[game]["watch"]["broadcast"]["broadcasters"]["national"][0]["shortName"].stringValue
+                    break
+                }
+            }
+            // If the user's favorite team is playing today, we should send a notification
+            if (hasGame) {
+                // Create an object that holds the data for our notification
+                let notification = UNMutableNotificationContent()
+                notification.title = "\(awayTeam) @ \(homeTeam)"
+                notification.subtitle = gameTime
+                notification.body = tvChannel
+                
+                // Trigger the notification at 5:00 PM
+                let gregorian = Calendar(identifier: .gregorian)
+                let now = Date()
+                var components = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: now)
+                components.hour = 17
+                components.minute = 0
+                components.second = 0
+                let date = gregorian.date(from: components)!
+                let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second,], from: date)
+                let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+                
+                // Set up a request to tell iOS to submit the notification with that trigger
+                let request = UNNotificationRequest(identifier: "notificationId",
+                                                    content: notification,
+                                                    trigger: notificationTrigger)
+                
+                // Submit the request to iOS
+                UNUserNotificationCenter.current().add(request) { error in
+                    if let error = error {
+                        print("Request error: ", error as Any)
+                    } else {
+                        print("Submitted notification")
+                    }
+                }
             }
         }
     }
@@ -140,6 +196,19 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let format = DateFormatter()
         format.dateFormat = "yyyyMMdd"
         return format.string(from: date)
+    }
+    
+    // Helper function to convert UTC time to the user's local time zone
+    private func convertUTCtoLocal(utcTime: String) -> String {
+        // Create dateFormatter with UTC time format
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        let date = dateFormatter.date(from: utcTime)
+        // Convert to local time based on specified format
+        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.timeZone = NSTimeZone.local
+        return dateFormatter.string(from: date!)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

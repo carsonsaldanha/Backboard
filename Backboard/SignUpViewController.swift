@@ -16,7 +16,7 @@ class SignUpViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var teamPickerView: UIPickerView!
     
-    var teams: [String] = ["None", "76ers", "Bucks", "Bulls", "Cavaliers", "Celtics", "Clippers",
+    let teams: [String] = ["None", "76ers", "Bucks", "Bulls", "Cavaliers", "Celtics", "Clippers",
                            "Grizzlies", "Hawks", "Heat", "Hornets", "Jazz", "Kings",
                            "Knicks", "Lakers", "Magic", "Mavericks", "Nets", "Nuggets",
                            "Pacers", "Pelicans", "Pistons", "Raptors", "Rockets", "Spurs",
