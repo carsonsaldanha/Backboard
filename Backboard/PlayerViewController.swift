@@ -46,7 +46,7 @@ class PlayerViewController: UIViewController {
     
     // Fetches player stats and appends to both statistics table view lists
     func loadPlayerStats() {
-        let playerURL = "http://data.nba.net/data/10s/prod/v1/2021/players/" + playerID + "_profile.json"
+        let playerURL = "https://data.nba.net/data/10s/prod/v1/2021/players/" + playerID + "_profile.json"
         AF.request(playerURL, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):

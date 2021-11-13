@@ -69,7 +69,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return gamesList.count
     }
     
-    // Sets the scores, team info, arena info, live game info, etc. for each cell in the table
+    // Sets the scores, team info, live game info, etc. for each cell in the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: scoreCellIdentifier, for: indexPath) as! ScoresTableViewCell
         let row = indexPath.row
@@ -87,26 +87,18 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Sets tags for images (which are buttons) to allow us to segue to team pages
         cell.awayLogo.tag = row
         cell.homeLogo.tag = row
-        
-        cell.arenaName?.text = gamesList[row]["arena"]["name"].stringValue
-        cell.location?.text = gamesList[row]["arena"]["city"].stringValue + ", " + gamesList[row]["arena"]["stateAbbr"].stringValue
                 
         let clockText: String
-        let attendanceText: String
         switch gamesList[row]["statusNum"].intValue{
         case 1:
             clockText = convertUTCtoLocal(utcTime: gamesList[row]["startTimeUTC"].stringValue)
-            attendanceText = "Pending"
         case 2:
             clockText = gamesList[row]["clock"].stringValue
-            attendanceText = gamesList[row]["attendance"].stringValue
         default:
             clockText = "Final"
-            attendanceText = gamesList[row]["attendance"].stringValue
         }
         
         cell.gameClock?.text = clockText
-        cell.attendance?.text = "Attendance: " + attendanceText
 
         return cell
     }
