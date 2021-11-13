@@ -20,6 +20,7 @@ class HighlightsTableViewCell: UITableViewCell {
 class HighlightsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var highlightsTableView: UITableView!
+    @IBOutlet weak var highlightsActivityIndicatorView: UIActivityIndicatorView!
     
     let highlightsCellIdentifier = "Highlights Cell"
     var highlightTitles: [String] = []
@@ -29,6 +30,8 @@ class HighlightsViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         highlightsTableView.delegate = self
         highlightsTableView.dataSource = self
+        highlightsActivityIndicatorView.hidesWhenStopped = true
+        highlightsActivityIndicatorView.startAnimating()
         fetchHighlights()
     }
     
@@ -79,6 +82,7 @@ class HighlightsViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             // Reload the table after the API request is compelete
             DispatchQueue.main.async {
+                self.highlightsActivityIndicatorView.stopAnimating()
                 self.highlightsTableView.reloadData()
             }
         }

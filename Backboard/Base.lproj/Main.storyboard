@@ -447,6 +447,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="xLc-qQ-RoI">
+                                        <rect key="frame" x="0.0" y="441" width="428" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -456,6 +460,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Highlights" image="star" catalog="system" selectedImage="star.fill" id="rOI-NC-2fV"/>
                     <connections>
+                        <outlet property="highlightsActivityIndicatorView" destination="xLc-qQ-RoI" id="Tm2-C4-DyK"/>
                         <outlet property="highlightsTableView" destination="kI0-xS-yHF" id="bVZ-d2-pAS"/>
                     </connections>
                 </viewController>
