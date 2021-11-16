@@ -10,25 +10,33 @@ import Alamofire
 import SwiftyJSON
 
 // Represents a screen displaying detailed player informaiton
-class PlayerViewController: UIViewController {
+class PlayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var playerID = String()
     var playerData: JSON = JSON()
     var playerStats: JSON = JSON()
     var currentStatList: [(String, String)] = []
     var careerStatList: [(String, String)] = []
+    
+    let seasonStatCellIdentifier = "Season Stat"
+    let careerStatCellIdentifier = "Career Stat"
 
     @IBOutlet weak var playerHeader: PlayerPageHeader!
+    @IBOutlet weak var seasonStatsTable: UITableView!
+    @IBOutlet weak var careerStatsTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        seasonStatsTable.delegate = self
+        seasonStatsTable.dataSource = self
+        careerStatsTable.delegate = self
+        careerStatsTable.dataSource = self
         loadHeader()
         loadPlayerStats()
     }
     
     // Fetches player photo and profile information and loads into display
     func loadHeader() {
-        print(playerID)
         let playerPhotoUrl = NSURL(string: "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + playerID + ".png")! as URL
         if let playerPhotoData: NSData = NSData(contentsOf: playerPhotoUrl) {
             playerHeader.playerPhoto.image = UIImage(data : playerPhotoData as Data)
@@ -40,7 +48,12 @@ class PlayerViewController: UIViewController {
         playerHeader.playerPos.text = playerData["pos"].stringValue
         playerHeader.playerHeight.text = "Hgt: " + playerData["heightFeet"].stringValue + "'" + playerData["heightInches"].stringValue + "''"
         playerHeader.playerWeight.text = "Wt: " + playerData["weightPounds"].stringValue + " lbs."
-        playerHeader.playerDraft.text = "Drafted: " + playerData["draft"]["seasonYear"].stringValue +  " (Round " + playerData["draft"]["roundNum"].stringValue + ", Pick " + playerData["draft"]["pickNum"].stringValue + ")"
+        if playerData["draft"]["seasonYear"].stringValue != "" {
+            playerHeader.playerDraft.text = "Drafted: " + playerData["draft"]["seasonYear"].stringValue +  " (Round " + playerData["draft"]["roundNum"].stringValue + ", Pick " + playerData["draft"]["pickNum"].stringValue + ")"
+        } else {
+            playerHeader.playerDraft.text = "Undrafted"
+        }
+       
         playerHeader.playerCountry.text = "Country: " + playerData["country"].stringValue
     }
     
@@ -51,8 +64,10 @@ class PlayerViewController: UIViewController {
             switch response.result {
             case .success(let value):
                 self.playerStats = JSON(value)["league"]["standard"]["stats"]
-                self.loadCurrentStats()
-                self.loadCareerStats()
+                self.loadStatData(statListIdentifer: "Current", statData: self.playerStats["latest"])
+                self.loadStatData(statListIdentifer: "Career", statData: self.playerStats["careerSummary"])
+                self.seasonStatsTable.reloadData()
+                self.careerStatsTable.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -60,31 +75,46 @@ class PlayerViewController: UIViewController {
     }
     
     // Populates current stats table; uses tuples to allow for a formatted string for display
-    func loadCurrentStats() {
-        let currentStatData = playerStats["latest"]
-        currentStatList.append(("PPG", currentStatData["ppg"].stringValue))
-        currentStatList.append(("RPG", currentStatData["rpg"].stringValue))
-        currentStatList.append(("APF", currentStatData["apg"].stringValue))
-        currentStatList.append(("MPG", currentStatData["mpg"].stringValue))
-        currentStatList.append(("TOVPG", currentStatData["topg"].stringValue))
-        currentStatList.append(("SPG", currentStatData["spg"].stringValue))
-        currentStatList.append(("BPG", currentStatData["bpg"].stringValue))
-        currentStatList.append(("FTP", currentStatData["ftp"].stringValue))
-        currentStatList.append(("FGP", currentStatData["fgp"].stringValue))
-        currentStatList.append(("Points", currentStatData["points"].stringValue))
-        currentStatList.append(("Assists", currentStatData["assists"].stringValue))
-        currentStatList.append(("Rebounds", currentStatData["totReb"].stringValue))
-        currentStatList.append(("Steals", currentStatData["steals"].stringValue))
-        currentStatList.append(("Blocks", currentStatData["blocks"].stringValue))
-        currentStatList.append(("Offensive Rebounds", currentStatData["offReb"].stringValue))
-        currentStatList.append(("Defensive Rebounds", currentStatData["defReb"].stringValue))
-        currentStatList.append(("Games Played", currentStatData["gamesPlayed"].stringValue))
-        currentStatList.append(("+/-", currentStatData["plusMinus"].stringValue))
-        currentStatList.append(("Minutes", currentStatData["min"].stringValue))
+    func loadStatData(statListIdentifer: String, statData: JSON) {
+        var statList: [(String, String)] = []
+        statList.append(("PPG", statData["ppg"].stringValue))
+        statList.append(("RPG", statData["rpg"].stringValue))
+        statList.append(("APF", statData["apg"].stringValue))
+        statList.append(("MPG", statData["mpg"].stringValue))
+        statList.append(("SPG", statData["spg"].stringValue))
+        statList.append(("BPG", statData["bpg"].stringValue))
+        statList.append(("FTP", statData["ftp"].stringValue))
+        statList.append(("FGP", statData["fgp"].stringValue))
+        statList.append(("Points", statData["points"].stringValue))
+        statList.append(("Assists", statData["assists"].stringValue))
+        statList.append(("Turnovers", statData["turnovers"].stringValue))
+        statList.append(("Rebounds", statData["totReb"].stringValue))
+        statList.append(("Steals", statData["steals"].stringValue))
+        statList.append(("Blocks", statData["blocks"].stringValue))
+        statList.append(("Offensive Rebounds", statData["offReb"].stringValue))
+        statList.append(("Defensive Rebounds", statData["defReb"].stringValue))
+        statList.append(("Games Played", statData["gamesPlayed"].stringValue))
+        statList.append(("+/-", statData["plusMinus"].stringValue))
+        statList.append(("Minutes", statData["min"].stringValue))
+        if statListIdentifer == "Current" {
+            currentStatList = statList
+        } else {
+            careerStatList = statList
+        }
     }
     
-    // Populates career stats table; uses tuples to allow for a formatted string for display
-    func loadCareerStats() {
-        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (tableView == seasonStatsTable ? currentStatList.count : careerStatList.count)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row = indexPath.row
+        let chosenList = tableView == seasonStatsTable ? currentStatList : careerStatList
+        let chosenCell = tableView == seasonStatsTable ? seasonStatCellIdentifier : careerStatCellIdentifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: chosenCell, for: indexPath) as! PlayerStatsCell
+
+        cell.statName.text = chosenList[row].0
+        cell.statValue.text = chosenList[row].1
+        return cell
     }
 }
