@@ -89,17 +89,21 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.homeLogo.tag = row
                 
         let clockText: String
+        // Set the clock text depending on if the game hasn't started yet, if it's halftime, the current quarter and game clock, or final
         switch gamesList[row]["statusNum"].intValue{
         case 1:
             clockText = convertUTCtoLocal(utcTime: gamesList[row]["startTimeUTC"].stringValue)
         case 2:
-            clockText = gamesList[row]["clock"].stringValue
+            if (gamesList[row]["period"]["isHalftime"] == true) {
+                clockText = "Halftime"
+            } else {
+                clockText = "Q" + gamesList[row]["period"]["current"].stringValue + "\n" + gamesList[row]["clock"].stringValue
+            }
         default:
             clockText = "Final"
         }
-        
         cell.gameClock?.text = clockText
-
+        
         return cell
     }
 

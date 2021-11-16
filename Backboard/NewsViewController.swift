@@ -29,7 +29,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         newsTableView.delegate = self
         newsTableView.dataSource = self
-        fetchArticles()
+        fetchTeamArticles()
     }
     
     // Returns the number of articles in the table
@@ -63,8 +63,49 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         UIApplication.shared.open(articleUrl)
     }
     
+    // Pulls favorite team articles from the news API and updates the table
+    func fetchTeamArticles() {
+        var retrievedFavoriteTeam = UserDefaults.standard.string(forKey: "favoriteTeam")
+        // If the user doesn't have a favorite team, just request popular NBA articles
+        if (retrievedFavoriteTeam == "None") {
+            retrievedFavoriteTeam = "nba"
+        }
+        let newsAPI = "https://newsapi.org/v2/everything?" +
+                      "q=\(retrievedFavoriteTeam!)&" +
+                      "domains=espn.com,cbssports.com,nbcsports.com,nba.com,bleacherreport.com,sports.yahoo.com" +
+                      "from=" + getTodaysDate() + "&" +
+                      "to=" + getTodaysDate() + "&" +
+                      "sortBy=popularity&" +
+                      "apiKey=bd2de92e7e834d6481f1c8f279d4add0"
+        AF.request(newsAPI, method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                // Only parse the first 5 articles and add the data to the arrays
+                for article in 0...4 {
+                    if let title = json["articles"][article]["title"].string {
+                        self.articleTitles.append(title)
+                    }
+                    if let image = json["articles"][article]["urlToImage"].string {
+                        self.articleImages.append(image)
+                    }
+                    if let url = json["articles"][article]["url"].string {
+                        self.articleLinks.append(url)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+            
+            // Get general NBA articles after the API request is compelete
+            DispatchQueue.main.async {
+                self.fetchNBAArticles()
+            }
+        }
+    }
+    
     // Pulls NBA articles from the news API and updates the table
-    func fetchArticles() {
+    func fetchNBAArticles() {
         let newsAPI = "https://newsapi.org/v2/everything?" +
                       "q=nba&" +
                       "domains=espn.com,cbssports.com,nbcsports.com,nba.com,bleacherreport.com,sports.yahoo.com" +
@@ -76,8 +117,8 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                // Only parse the first 25 articles and add the data to the arrays
-                for article in 0...24 {
+                // Only parse the first 20 articles and add the data to the arrays
+                for article in 0...19 {
                     if let title = json["articles"][article]["title"].string {
                         self.articleTitles.append(title)
                     }
