@@ -171,7 +171,8 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 components.second = 0
                 let date = gregorian.date(from: components)!
                 let triggerDaily = Calendar.current.dateComponents([.hour,.minute,.second,], from: date)
-                let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+//                let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
+                let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 6, repeats: false) // DELETE AFTER DEMO
                 
                 // Set up a request to tell iOS to submit the notification with that trigger
                 let request = UNNotificationRequest(identifier: "notificationId",
