@@ -56,7 +56,7 @@ class HighlightsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // Pulls NBA highlights from the reddit API and updates the table
     func fetchHighlights() {
-        let redditAPI = "https://www.reddit.com/search/.json?q=subreddit%3Anba%20site%3Astreamable.com&sort=new"
+        let redditAPI = "https://www.reddit.com/search/.json?q=subreddit%3Anba%20site%3Astreamable.com&sort=hot"
         AF.request(redditAPI, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
