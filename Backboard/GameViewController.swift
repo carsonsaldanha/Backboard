@@ -19,11 +19,14 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var awayStats:[(String, JSON)] = []
     var homeStats:[(String, JSON)] = []
-    @IBOutlet weak var awayStatsLogo: UIImageView!
-    @IBOutlet weak var homeStatsLogo: UIImageView!
+    
+    @IBOutlet weak var awayStatsLogo: UIButton!
+    @IBOutlet weak var homeStatsLogo: UIButton!
     
     let quartersCellIdentifier = "Quarter Cell"
     let teamStatsCellIdentifier = "Team Stats Cell"
+    let awayTeamSegueIdentifier = "Away Team Segue"
+    let homeTeamSegueIdentifier = "Home Team Segue"
 
     @IBOutlet weak var gameHeader: GamePageHeader!
     @IBOutlet weak var quartersTableView: UITableView!
@@ -127,11 +130,11 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         gameHeader.arena.text = gameInfo["arena"]["name"].stringValue
         gameHeader.attendance.text = (gameInfo["attendance"] == "" || gameInfo["attendance"] == "0") ? "Attendance: Pending" : "Attendance: " + gameInfo["attendance"].stringValue
         
-        gameHeader.awayLogo.image = UIImage(named: gameInfo["vTeam"]["teamId"].stringValue)
-        gameHeader.homeLogo.image = UIImage(named: gameInfo["hTeam"]["teamId"].stringValue)
+        gameHeader.awayLogo.setImage(UIImage(named: gameInfo["vTeam"]["teamId"].stringValue), for: .normal)
+        gameHeader.homeLogo.setImage(UIImage(named: gameInfo["hTeam"]["teamId"].stringValue), for: .normal)
         
-        awayStatsLogo.image = UIImage(named: gameInfo["vTeam"]["teamId"].stringValue)
-        homeStatsLogo.image = UIImage(named: gameInfo["hTeam"]["teamId"].stringValue)
+        awayStatsLogo.setImage(UIImage(named: gameInfo["vTeam"]["teamId"].stringValue), for: .normal)
+        homeStatsLogo.setImage(UIImage(named: gameInfo["hTeam"]["teamId"].stringValue), for: .normal)
     }
     
     // Loads all header data from game JSON
@@ -191,6 +194,17 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
             awayStats = statList
         }else {
             homeStats = statList
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == awayTeamSegueIdentifier,
+           let destination = segue.destination as? TeamViewController {
+            destination.teamID = gameData["basicGameData"]["vTeam"]["teamId"].stringValue
+        }
+        else if segue.identifier == homeTeamSegueIdentifier,
+            let destination = segue.destination as? TeamViewController {
+             destination.teamID = gameData["basicGameData"]["hTeam"]["teamId"].stringValue
         }
     }
 }

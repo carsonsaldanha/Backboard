@@ -20,6 +20,6 @@ class GamePageHeader: UIView {
     @IBOutlet weak var arena: UILabel!
     @IBOutlet weak var attendance: UILabel!
     
-    @IBOutlet weak var awayLogo: UIImageView!
-    @IBOutlet weak var homeLogo: UIImageView!
+    @IBOutlet weak var awayLogo: UIButton!
+    @IBOutlet weak var homeLogo: UIButton!
 }

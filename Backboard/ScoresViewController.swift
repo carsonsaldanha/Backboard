@@ -178,6 +178,13 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    @IBAction func selectDate(_ sender: Any) {
+        gameDate = datePicker.date
+        gamesList = []
+        changedDate = true
+        fetchGames()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == gameSegueIdentifier,
            let destination = segue.destination as? GameViewController,
@@ -197,12 +204,4 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
             destination.teamID = gamesList[tappedButton.tag]["hTeam"]["teamId"].stringValue
         }
     }
-    
-    @IBAction func selectDate(_ sender: Any) {
-        gameDate = datePicker.date
-        gamesList = []
-        changedDate = true
-        fetchGames()
-    }
-
 }

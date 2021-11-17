@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P0I-Xq-rCo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P0I-Xq-rCo">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -856,10 +856,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9Y-F0-iJe">
-                                        <rect key="frame" x="307" y="9" width="51" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jeY-2d-APY">
                                         <rect key="frame" x="6" y="14" width="36" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -881,10 +877,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tAb-cb-hx5">
-                                        <rect key="frame" x="50" y="9" width="50" height="52"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZHf-uk-9hF">
                                         <rect key="frame" x="366" y="14" width="36" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -920,17 +912,35 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3H-J9-vUw">
+                                        <rect key="frame" x="308" y="10" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <segue destination="m2T-O2-TG3" kind="show" identifier="Home Team Segue" id="Bfd-Bh-eDA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWe-XY-gtF">
+                                        <rect key="frame" x="50" y="10" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <segue destination="m2T-O2-TG3" kind="show" identifier="Away Team Segue" id="Pl7-Xg-zsp"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="arena" destination="VhV-a5-Nf9" id="1Xz-aY-Bl0"/>
                                     <outlet property="attendance" destination="Jf7-6c-Gud" id="X4B-55-syr"/>
-                                    <outlet property="awayLogo" destination="tAb-cb-hx5" id="l6P-fi-vVQ"/>
+                                    <outlet property="awayLogo" destination="zWe-XY-gtF" id="cif-yT-MSh"/>
                                     <outlet property="awayName" destination="jeY-2d-APY" id="yNI-MW-wvj"/>
                                     <outlet property="awayRecord" destination="8Bg-nq-O02" id="JfL-jQ-RF8"/>
                                     <outlet property="awayScore" destination="Qhc-rD-LK9" id="Gfd-UR-eKI"/>
                                     <outlet property="clock" destination="blq-xq-iP1" id="KL6-uZ-PNf"/>
-                                    <outlet property="homeLogo" destination="J9Y-F0-iJe" id="aKm-Q3-iba"/>
+                                    <outlet property="homeLogo" destination="s3H-J9-vUw" id="2AO-Oy-2Ze"/>
                                     <outlet property="homeName" destination="ZHf-uk-9hF" id="Un4-Kq-SsK"/>
                                     <outlet property="homeRecord" destination="F67-uN-ehd" id="raf-bP-huk"/>
                                     <outlet property="homeScore" destination="efQ-c1-fon" id="ur2-dr-oiZ"/>
@@ -1107,14 +1117,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xn-oz-cCw">
-                                <rect key="frame" x="220" y="517" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="goB-w4-Dh4">
-                                <rect key="frame" x="350" y="517" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Leaders" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhJ-0Q-UFJ">
                                 <rect key="frame" x="20" y="272" width="148" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1172,15 +1174,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0t-oh-dJX">
+                                <rect key="frame" x="220" y="517" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="m2T-O2-TG3" kind="show" identifier="Away Team Segue" id="ncg-eK-SdF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tey-Eq-LFe">
+                                <rect key="frame" x="350" y="517" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="m2T-O2-TG3" kind="show" identifier="Home Team Segue" id="qGR-oO-sqS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vgc-B7-7ou"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="F09-co-cVB"/>
                     <connections>
-                        <outlet property="awayStatsLogo" destination="7Xn-oz-cCw" id="c1Y-5A-l1j"/>
+                        <outlet property="awayStatsLogo" destination="e0t-oh-dJX" id="rF2-WL-RlI"/>
                         <outlet property="gameHeader" destination="U90-6J-ZUz" id="V1e-KM-mIA"/>
-                        <outlet property="homeStatsLogo" destination="goB-w4-Dh4" id="1pP-ba-I4z"/>
+                        <outlet property="homeStatsLogo" destination="Tey-Eq-LFe" id="NJM-ep-jrB"/>
                         <outlet property="quartersTableView" destination="SEl-zd-w6R" id="2K0-2d-GjV"/>
                         <outlet property="teamLeaderSegment" destination="hZI-HX-FqA" id="BhF-v2-Hq1"/>
                         <outlet property="teamLeaders" destination="Anf-VN-shR" id="ul5-z8-fbX"/>
@@ -1613,7 +1633,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KPu-hY-Oaw"/>
+        <segue reference="qGR-oO-sqS"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chart.bar" catalog="system" width="128" height="90"/>
