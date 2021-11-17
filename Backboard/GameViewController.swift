@@ -20,6 +20,9 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     var awayStats:[(String, JSON)] = []
     var homeStats:[(String, JSON)] = []
     
+    var awayLeaderInfo: JSON = JSON()
+    var homeLeaderInfo: JSON = JSON()
+    
     @IBOutlet weak var awayStatsLogo: UIButton!
     @IBOutlet weak var homeStatsLogo: UIButton!
     
@@ -162,6 +165,9 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         teamLeaders.awayPlayerValue.text = statInfo["vTeam"]["leaders"][leaderStat]["value"].stringValue
         teamLeaders.homePlayerValue.text = statInfo["hTeam"]["leaders"][leaderStat]["value"].stringValue
+        
+        setPlayerData(playerID: awayPlayer["personId"].stringValue, isHomePlayer: false)
+        setPlayerData(playerID: homePlayer["personId"].stringValue, isHomePlayer: true)
     }
     
     // Loads team stats for home/away teams as well as a formatted string for display
@@ -212,19 +218,37 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         else if segue.identifier == awayPlayerSegueIdentifier,
             let destination = segue.destination as? PlayerViewController {
-             let personID = gameData["stats"]["vTeam"]["leaders"][leaderStat]["players"][0]["personID"].stringValue
+             let personID = gameData["stats"]["vTeam"]["leaders"][leaderStat]["players"][0]["personId"].stringValue
              destination.playerID = personID
-             destination.playerData = getPlayerData(playerID: personID)
+             destination.playerData = awayLeaderInfo
         }
         else if segue.identifier == homePlayerSegueIdentifier,
             let destination = segue.destination as? PlayerViewController {
-             let personID = gameData["stats"]["hTeam"]["leaders"][leaderStat]["players"][0]["personID"].stringValue
+             let personID = gameData["stats"]["hTeam"]["leaders"][leaderStat]["players"][0]["personId"].stringValue
              destination.playerID = personID
-             destination.playerData = getPlayerData(playerID: personID)
+             destination.playerData = homeLeaderInfo
         }
     }
     
-    func getPlayerData(playerID: String) -> JSON {
-        return JSON()
+    func setPlayerData(playerID: String, isHomePlayer: Bool) {
+        let playersURL = "https://data.nba.net/data/10s/prod/v1/2021/players.json"
+        AF.request(playersURL, method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let playerList = JSON(value)["league"]["standard"].array
+                for player in playerList!{
+                    if(player["personId"].stringValue == playerID){
+                        if isHomePlayer {
+                            self.homeLeaderInfo = player
+                        } else{
+                            self.awayLeaderInfo = player
+                        }
+                        break
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
