@@ -57,10 +57,10 @@ func formatGameClock(gameData: JSON) -> String {
         return convertUTCtoLocal(utcTime: gameData["startTimeUTC"].stringValue)
     case 2:
         if (gameData["period"]["isHalftime"].boolValue) {
-            return "Halftime"
+            return "HT"
         }
         else if (gameData["period"]["isEndOfPeriod"].boolValue) {
-            return "End of Quarter"
+            return "EOQ"
         }
         else {
             return gameData["clock"].stringValue
