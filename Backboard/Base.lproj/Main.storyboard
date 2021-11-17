@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P0I-Xq-rCo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P0I-Xq-rCo">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -616,15 +616,6 @@
                                     <action selector="presssedSignOutButton:" destination="Lo3-iS-X8Y" eventType="touchUpInside" id="W77-aI-3eY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0o-aC-56h">
-                                <rect key="frame" x="29" y="711" width="370.00000000000045" height="55.000000000000227"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="pressedSaveButton:" destination="Lo3-iS-X8Y" eventType="touchUpInside" id="1b6-ha-idr"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZc-2I-GPi">
                                 <rect key="frame" x="20" y="154" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -681,7 +672,7 @@
                                 <color key="textColor" systemColor="systemGray2Color"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1c-S5-kir" customClass="DLRadioButton">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1c-S5-kir" customClass="DLRadioButton">
                                 <rect key="frame" x="386" y="306" width="22" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.90721040959999999" green="0.20142331720000001" blue="0.21621975299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -708,8 +699,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="pressedSystemButton:" destination="Lo3-iS-X8Y" eventType="touchUpInside" id="Rae-bB-Plw"/>
-                                    <outletCollection property="otherButtons" destination="QeW-2Z-EVA" id="Zyh-te-zwZ"/>
-                                    <outletCollection property="otherButtons" destination="bMz-yY-IAH" id="hU8-pu-yLL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QeW-2Z-EVA" customClass="DLRadioButton">
@@ -798,11 +787,13 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gearshape" catalog="system" selectedImage="gearshape.fill" id="VHR-bi-A66"/>
                     <connections>
+                        <outlet property="darkButton" destination="bMz-yY-IAH" id="cCv-NI-0tp"/>
                         <outlet property="emailLabel" destination="mkT-HJ-V0v" id="OgD-so-Zhi"/>
                         <outlet property="favoriteTeamLabel" destination="seU-SX-z7O" id="0Kb-mc-CaT"/>
+                        <outlet property="lightButton" destination="QeW-2Z-EVA" id="c0i-C3-CCg"/>
                         <outlet property="notificationsSwitch" destination="1ZH-Dm-IBA" id="2aC-9S-NgB"/>
-                        <outlet property="saveButton" destination="m0o-aC-56h" id="eJP-lj-it9"/>
                         <outlet property="signOutButton" destination="pcI-Z7-Ve4" id="Wcy-iQ-Xhk"/>
+                        <outlet property="systemButton" destination="d1c-S5-kir" id="Xwy-o5-PuJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P7S-wC-LR0" sceneMemberID="firstResponder"/>

@@ -11,11 +11,13 @@ import DLRadioButton
 
 class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate {
 
-    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var favoriteTeamLabel: UILabel!
     @IBOutlet weak var notificationsSwitch: UISwitch!
+    @IBOutlet weak var systemButton: DLRadioButton!
+    @IBOutlet weak var lightButton: DLRadioButton!
+    @IBOutlet weak var darkButton: DLRadioButton!
     
     var currentView: UIUserInterfaceStyle!
     var updateView: UIUserInterfaceStyle!
@@ -27,17 +29,13 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         UNUserNotificationCenter.current().delegate = self
 
         // Do any additional setup after loading the view.
-        // Design for the saveButton
-        saveButton.backgroundColor = UIColor.init(red: 171/255, green: 171/255, blue: 171/255, alpha: 1)
-        saveButton.layer.cornerRadius = 25.0
-        saveButton.tintColor = UIColor.white
         
         // Design for the signout button
         signOutButton.backgroundColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
         signOutButton.layer.cornerRadius = 25.0
         signOutButton.tintColor = UIColor.white
         
-        //get and output display the favorite team
+        //get and display the favorite team and account email
         emailLabel.text! = (Auth.auth().currentUser?.email)!
         
         let defaults = UserDefaults.standard
@@ -76,17 +74,31 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         lineView6.layer.borderColor = UIColor.gray.cgColor
         self.view.addSubview(lineView6)
         
-        //returns and stores the current display mode of the phone
-        var osTheme: UIUserInterfaceStyle {
-            return UIScreen.main.traitCollection.userInterfaceStyle
-        }
-        currentView = osTheme
-        
+        //check user defaults to see if notifications were enabled
         let retrievedNotificationState = defaults.bool(forKey: "notifications")
         if (retrievedNotificationState == false) {
             notificationsSwitch.isOn = false
         } else {
             notificationsSwitch.isOn = true
+        }
+        
+        //check user defaults to see the phone's current display mode
+        //select and deselect the buttons according to the setting
+        let currentMode = defaults.integer(forKey: "mode")
+        if currentMode == 0 {
+            systemButton.isSelected = true
+            lightButton.isSelected = false
+            darkButton.isSelected = false
+        }
+        else if currentMode == 1 {
+            systemButton.isSelected = false
+            lightButton.isSelected = true
+            darkButton.isSelected = false
+        }
+        else {
+            systemButton.isSelected = false
+            lightButton.isSelected = false
+            darkButton.isSelected = true
         }
     }
     
@@ -96,17 +108,44 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
             return UIScreen.main.traitCollection.userInterfaceStyle
         }
         
-        updateView = osTheme
+        UIApplication.shared.windows.forEach { window in
+            window.overrideUserInterfaceStyle = osTheme
+        }
+        
+        let defaults = UserDefaults.standard
+        defaults.set(0, forKey: "mode")
+        
+        systemButton.isSelected = true
+        lightButton.isSelected = false
+        darkButton.isSelected = false
     }
     
-    //change the current view controller to light mode
+    //change the app to light mode
     @IBAction func pressedLightButton(_ sender: Any) {
-        updateView = .light
+        UIApplication.shared.windows.forEach { window in
+            window.overrideUserInterfaceStyle = .light
+        }
+        
+        let defaults = UserDefaults.standard
+        defaults.set(1, forKey: "mode")
+        
+        systemButton.isSelected = false
+        lightButton.isSelected = true
+        darkButton.isSelected = false
     }
     
-    //change current view controller to dark mode
+    //change the app to dark mode
     @IBAction func pressedDarkButton(_ sender: Any) {
-        updateView = .dark
+        UIApplication.shared.windows.forEach { window in
+            window.overrideUserInterfaceStyle = .dark
+        }
+        
+        let defaults = UserDefaults.standard
+        defaults.set(2, forKey: "mode")
+        
+        systemButton.isSelected = false
+        lightButton.isSelected = false
+        darkButton.isSelected = true
     }
     
     // Update the notification user default state to set the toggle based on it
@@ -130,15 +169,6 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         }
     }
     
-    //save changes if we press the save button
-    @IBAction func pressedSaveButton(_ sender: Any) {
-        UIApplication.shared.windows.forEach { window in
-            window.overrideUserInterfaceStyle = updateView
-        }
-        currentView = updateView
-        pressedSave = true
-    }
-    
     //log out if we press the sign out button
     @IBAction func presssedSignOutButton(_ sender: Any) {
         do {
@@ -151,16 +181,5 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         catch {
             print("Error, Cannot sign out")
         }
-    }
-    
-    //when changing view controllers, check if we saved our changes
-    //if we did, nothing happens
-    //if we didn't, revert to original settings
-    override func viewWillDisappear(_ animated: Bool) {
-        if !pressedSave {
-            overrideUserInterfaceStyle = currentView
-            updateView = currentView
-        }
-        pressedSave = false
     }
 }
