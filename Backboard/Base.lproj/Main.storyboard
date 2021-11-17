@@ -1063,14 +1063,6 @@
                                 <rect key="frame" x="10" y="347" width="408" height="162"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ESb-jd-rcy">
-                                        <rect key="frame" x="30" y="0.0" width="75" height="75"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lUI-ZI-g0p">
-                                        <rect key="frame" x="30" y="87" width="75" height="75"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qp6-L1-V3C">
                                         <rect key="frame" x="125" y="27" width="187" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1099,14 +1091,24 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6A-ra-rsL">
+                                        <rect key="frame" x="30" y="0.0" width="75" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VH-Td-4Qe">
+                                        <rect key="frame" x="30" y="87" width="75" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="awayPlayerName" destination="Qp6-L1-V3C" id="n0K-Zd-n4j"/>
-                                    <outlet property="awayPlayerPhoto" destination="ESb-jd-rcy" id="e5G-LK-MEp"/>
+                                    <outlet property="awayPlayerPhoto" destination="b6A-ra-rsL" id="lYs-Bg-7sF"/>
                                     <outlet property="awayPlayerValue" destination="1u2-vV-C5d" id="Rh9-2a-x0I"/>
                                     <outlet property="homePlayerName" destination="cUX-pM-xSZ" id="3Yw-0S-Ogf"/>
-                                    <outlet property="homePlayerPhoto" destination="lUI-ZI-g0p" id="1JP-Uu-iL4"/>
+                                    <outlet property="homePlayerPhoto" destination="0VH-Td-4Qe" id="hev-ND-He8"/>
                                     <outlet property="homePlayerValue" destination="Lz7-cM-dGk" id="LXB-cT-p4m"/>
                                 </connections>
                             </view>

@@ -13,6 +13,6 @@ class TeamLeaderView: UIView {
     @IBOutlet weak var homePlayerName: UILabel!
     @IBOutlet weak var awayPlayerValue: UILabel!
     @IBOutlet weak var homePlayerValue: UILabel!
-    @IBOutlet weak var awayPlayerPhoto: UIImageView!
-    @IBOutlet weak var homePlayerPhoto: UIImageView!
+    @IBOutlet weak var awayPlayerPhoto: UIButton!
+    @IBOutlet weak var homePlayerPhoto: UIButton!
 }

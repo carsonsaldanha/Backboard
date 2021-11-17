@@ -27,6 +27,8 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
     let teamStatsCellIdentifier = "Team Stats Cell"
     let awayTeamSegueIdentifier = "Away Team Segue"
     let homeTeamSegueIdentifier = "Home Team Segue"
+    let awayPlayerSegueIdentifier = "Away Player Segue"
+    let homePlayerSegueIdentifier = "Home Player Segue"
 
     @IBOutlet weak var gameHeader: GamePageHeader!
     @IBOutlet weak var quartersTableView: UITableView!
@@ -143,14 +145,16 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         let awayPlayer = statInfo["vTeam"]["leaders"][leaderStat]["players"][0]
         let homePlayer = statInfo["hTeam"]["leaders"][leaderStat]["players"][0]
         
+        teamLeaders.awayPlayerPhoto.imageView?.contentMode = .scaleAspectFit
         let awayPhotoUrl = NSURL(string: "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + awayPlayer["personId"].stringValue + ".png")! as URL
         if let awayPhotoData: NSData = NSData(contentsOf: awayPhotoUrl) {
-            teamLeaders.awayPlayerPhoto.image = UIImage(data : awayPhotoData as Data)
+            teamLeaders.awayPlayerPhoto.setImage(UIImage(data : awayPhotoData as Data), for: .normal)
         }
         
+        teamLeaders.homePlayerPhoto.imageView?.contentMode = .scaleAspectFit
         let homePhotoUrl = NSURL(string: "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/" + homePlayer["personId"].stringValue + ".png")! as URL
         if let homePhotoData: NSData = NSData(contentsOf: homePhotoUrl) {
-            teamLeaders.homePlayerPhoto.image = UIImage(data : homePhotoData as Data)
+            teamLeaders.homePlayerPhoto.setImage(UIImage(data : homePhotoData as Data), for: .normal)
         }
         
         teamLeaders.awayPlayerName.text = awayPlayer["firstName"].stringValue + " " + awayPlayer["lastName"].stringValue
@@ -206,5 +210,21 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
             let destination = segue.destination as? TeamViewController {
              destination.teamID = gameData["basicGameData"]["hTeam"]["teamId"].stringValue
         }
+        else if segue.identifier == awayPlayerSegueIdentifier,
+            let destination = segue.destination as? PlayerViewController {
+             let personID = gameData["stats"]["vTeam"]["leaders"][leaderStat]["players"][0]["personID"].stringValue
+             destination.playerID = personID
+             destination.playerData = getPlayerData(playerID: personID)
+        }
+        else if segue.identifier == homePlayerSegueIdentifier,
+            let destination = segue.destination as? PlayerViewController {
+             let personID = gameData["stats"]["hTeam"]["leaders"][leaderStat]["players"][0]["personID"].stringValue
+             destination.playerID = personID
+             destination.playerData = getPlayerData(playerID: personID)
+        }
+    }
+    
+    func getPlayerData(playerID: String) -> JSON {
+        return JSON()
     }
 }
