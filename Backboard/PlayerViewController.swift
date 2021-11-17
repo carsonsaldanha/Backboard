@@ -79,7 +79,7 @@ class PlayerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var statList: [(String, String)] = []
         statList.append(("PPG", statData["ppg"].stringValue))
         statList.append(("RPG", statData["rpg"].stringValue))
-        statList.append(("APF", statData["apg"].stringValue))
+        statList.append(("APG", statData["apg"].stringValue))
         statList.append(("MPG", statData["mpg"].stringValue))
         statList.append(("SPG", statData["spg"].stringValue))
         statList.append(("BPG", statData["bpg"].stringValue))
