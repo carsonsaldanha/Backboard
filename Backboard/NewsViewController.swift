@@ -138,13 +138,4 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
-    // Helper function to get today's date for the news API
-    private func getTodaysDate() -> String {
-        let date = Date()
-        let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd"
-        return format.string(from: date)
-    }
-
 }

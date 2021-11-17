@@ -85,17 +85,21 @@ class PlayerViewController: UIViewController, UITableViewDelegate, UITableViewDa
         statList.append(("BPG", statData["bpg"].stringValue))
         statList.append(("FTP", statData["ftp"].stringValue))
         statList.append(("FGP", statData["fgp"].stringValue))
+        statList.append(("3PTP", statData["tpp"].stringValue))
         statList.append(("Points", statData["points"].stringValue))
         statList.append(("Assists", statData["assists"].stringValue))
-        statList.append(("Turnovers", statData["turnovers"].stringValue))
         statList.append(("Rebounds", statData["totReb"].stringValue))
         statList.append(("Steals", statData["steals"].stringValue))
         statList.append(("Blocks", statData["blocks"].stringValue))
+        statList.append(("Made Free Throws", statData["ftm"].stringValue))
+        statList.append(("Made Field Goals", statData["fgm"].stringValue))
+        statList.append(("Made Threes", statData["tpm"].stringValue))
         statList.append(("Offensive Rebounds", statData["offReb"].stringValue))
         statList.append(("Defensive Rebounds", statData["defReb"].stringValue))
+        statList.append(("Turnovers", statData["turnovers"].stringValue))
         statList.append(("Games Played", statData["gamesPlayed"].stringValue))
-        statList.append(("+/-", statData["plusMinus"].stringValue))
         statList.append(("Minutes", statData["min"].stringValue))
+        statList.append(("+/-", statData["plusMinus"].stringValue))
         if statListIdentifer == "Current" {
             currentStatList = statList
         } else {

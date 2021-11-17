@@ -19,5 +19,5 @@ class ScoresTableViewCell: UITableViewCell {
     @IBOutlet weak var awayRecord: UILabel!
     @IBOutlet weak var homeRecord: UILabel!
     @IBOutlet weak var gameClock: UILabel!
-    
+    @IBOutlet weak var gamePeriod: UILabel!
 }

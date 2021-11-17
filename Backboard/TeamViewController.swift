@@ -172,20 +172,6 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         teamStatsList.append(("EFF", teamRankData["eff"]))
     }
     
-    // Formats a ranking from a given number
-    func formatRank(rank: String) -> String{
-        switch rank {
-        case "1":
-            return "1st"
-        case "2":
-            return "2nd"
-        case "3":
-            return "3rd"
-        default:
-            return rank + "th"
-        }
-    }
-    
     // Segues to Player VC based on roster table view selection
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == playerSegueIdentifier,

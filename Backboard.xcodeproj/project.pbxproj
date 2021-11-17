@@ -29,6 +29,7 @@
 		F245276B27349DFF008A2536 /* PlayerPageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F245276A27349DFF008A2536 /* PlayerPageHeader.swift */; };
 		F247F2FE27331BBB00B9E2B7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */; };
 		F247F30027331CFF00B9E2B7 /* ScoresTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F247F2FF27331CFF00B9E2B7 /* ScoresTableViewCell.swift */; };
+		F29B64D727447CEB00852C1F /* FormattingMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29B64D627447CEB00852C1F /* FormattingMethods.swift */; };
 		F2A1D2342734920500DDA27D /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1D2332734920500DDA27D /* TeamViewController.swift */; };
 		F2A1D2362734935700DDA27D /* TeamPageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1D2352734935700DDA27D /* TeamPageHeader.swift */; };
 		F2A1D2382734938900DDA27D /* RosterPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1D2372734938900DDA27D /* RosterPlayerCell.swift */; };
@@ -64,6 +65,7 @@
 		F245276A27349DFF008A2536 /* PlayerPageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPageHeader.swift; sourceTree = "<group>"; };
 		F247F2FD27331BBB00B9E2B7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		F247F2FF27331CFF00B9E2B7 /* ScoresTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresTableViewCell.swift; sourceTree = "<group>"; };
+		F29B64D627447CEB00852C1F /* FormattingMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingMethods.swift; sourceTree = "<group>"; };
 		F2A1D2332734920500DDA27D /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
 		F2A1D2352734935700DDA27D /* TeamPageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamPageHeader.swift; sourceTree = "<group>"; };
 		F2A1D2372734938900DDA27D /* RosterPlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RosterPlayerCell.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				DA93628A271611D7000F00B7 /* Assets.xcassets */,
 				DA93628F271611D7000F00B7 /* Info.plist */,
 				641BAC5F271A05C6000A5C25 /* GoogleService-Info.plist */,
+				F29B64D627447CEB00852C1F /* FormattingMethods.swift */,
 			);
 			path = Backboard;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				DA936298271614AE000F00B7 /* ScoresViewController.swift in Sources */,
 				F247F30027331CFF00B9E2B7 /* ScoresTableViewCell.swift in Sources */,
 				DA936282271611D6000F00B7 /* AppDelegate.swift in Sources */,
+				F29B64D727447CEB00852C1F /* FormattingMethods.swift in Sources */,
 				DABBF00C27345F210047E133 /* RadioButton.swift in Sources */,
 				F245276B27349DFF008A2536 /* PlayerPageHeader.swift in Sources */,
 				F2B2805D27337F6300D7D743 /* QuarterScoresCell.swift in Sources */,

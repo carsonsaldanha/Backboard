@@ -121,7 +121,11 @@ class GameViewController: UIViewController, UITableViewDelegate, UITableViewData
         gameHeader.awayScore.text = gameInfo["vTeam"]["score"].stringValue
         gameHeader.homeScore.text = gameInfo["hTeam"]["score"].stringValue
         
-        gameHeader.clock.text = gameInfo["clock"].stringValue
+        gameHeader.clock.text = formatGameClock(gameData: gameInfo)
+        gameHeader.period.text = formatGamePeriod(gameData: gameInfo)
+        
+        gameHeader.arena.text = gameInfo["arena"]["name"].stringValue
+        gameHeader.attendance.text = (gameInfo["attendance"] == "" || gameInfo["attendance"] == "0") ? "Attendance: Pending" : "Attendance: " + gameInfo["attendance"].stringValue
         
         gameHeader.awayLogo.image = UIImage(named: gameInfo["vTeam"]["teamId"].stringValue)
         gameHeader.homeLogo.image = UIImage(named: gameInfo["hTeam"]["teamId"].stringValue)

@@ -74,12 +74,12 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: scoreCellIdentifier, for: indexPath) as! ScoresTableViewCell
         let row = indexPath.row
         
-        cell.awayName?.text = gamesList[row]["vTeam"]["triCode"].stringValue
-        cell.homeName?.text = gamesList[row]["hTeam"]["triCode"].stringValue
-        cell.awayScore?.text = gamesList[row]["vTeam"]["score"].stringValue
-        cell.homeScore?.text = gamesList[row]["hTeam"]["score"].stringValue
-        cell.awayRecord?.text = gamesList[row]["vTeam"]["win"].stringValue + "-" + gamesList[row]["vTeam"]["loss"].stringValue
-        cell.homeRecord?.text = gamesList[row]["hTeam"]["win"].stringValue + "-" + gamesList[row]["hTeam"]["loss"].stringValue
+        cell.awayName.text = gamesList[row]["vTeam"]["triCode"].stringValue
+        cell.homeName.text = gamesList[row]["hTeam"]["triCode"].stringValue
+        cell.awayScore.text = gamesList[row]["vTeam"]["score"].stringValue
+        cell.homeScore.text = gamesList[row]["hTeam"]["score"].stringValue
+        cell.awayRecord.text = gamesList[row]["vTeam"]["win"].stringValue + "-" + gamesList[row]["vTeam"]["loss"].stringValue
+        cell.homeRecord.text = gamesList[row]["hTeam"]["win"].stringValue + "-" + gamesList[row]["hTeam"]["loss"].stringValue
         
         cell.awayLogo.setImage(UIImage(named: gamesList[row]["vTeam"]["teamId"].stringValue), for: .normal)
         cell.homeLogo.setImage(UIImage(named: gamesList[row]["hTeam"]["teamId"].stringValue), for: .normal)
@@ -88,21 +88,8 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.awayLogo.tag = row
         cell.homeLogo.tag = row
                 
-        let clockText: String
-        // Set the clock text depending on if the game hasn't started yet, if it's halftime, the current quarter and game clock, or final
-        switch gamesList[row]["statusNum"].intValue{
-        case 1:
-            clockText = convertUTCtoLocal(utcTime: gamesList[row]["startTimeUTC"].stringValue)
-        case 2:
-            if (gamesList[row]["period"]["isHalftime"] == true) {
-                clockText = "Halftime"
-            } else {
-                clockText = "Q" + gamesList[row]["period"]["current"].stringValue + "\n" + gamesList[row]["clock"].stringValue
-            }
-        default:
-            clockText = "Final"
-        }
-        cell.gameClock?.text = clockText
+        cell.gameClock.text = formatGameClock(gameData: gamesList[row])
+        cell.gamePeriod.text = formatGamePeriod(gameData: gamesList[row])
         
         return cell
     }
@@ -189,26 +176,6 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             }
         }
-    }
-    
-    // Helper function to get today's date for updated game info
-    private func formatDate(date: Date) -> String {
-        let format = DateFormatter()
-        format.dateFormat = "yyyyMMdd"
-        return format.string(from: date)
-    }
-    
-    // Helper function to convert UTC time to the user's local time zone
-    private func convertUTCtoLocal(utcTime: String) -> String {
-        // Create dateFormatter with UTC time format
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        let date = dateFormatter.date(from: utcTime)
-        // Convert to local time based on specified format
-        dateFormatter.dateFormat = "h:mm a"
-        dateFormatter.timeZone = NSTimeZone.local
-        return dateFormatter.string(from: date!)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
