@@ -30,8 +30,15 @@ class HighlightsViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         highlightsTableView.delegate = self
         highlightsTableView.dataSource = self
+        highlightsTableView.rowHeight = UITableView.automaticDimension
+        highlightsTableView.estimatedRowHeight = 300
+        
+        highlightsActivityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        highlightsActivityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        highlightsActivityIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         highlightsActivityIndicatorView.hidesWhenStopped = true
         highlightsActivityIndicatorView.startAnimating()
+        
         fetchHighlights()
     }
     
