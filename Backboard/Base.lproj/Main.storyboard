@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P0I-Xq-rCo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P0I-Xq-rCo">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -26,6 +26,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGm-j1-bGZ">
                                 <rect key="frame" x="28.666666666666657" y="750" width="371" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="UUs-TN-pdO"/>
+                                </constraints>
                                 <state key="normal" title="Log In"/>
                                 <connections>
                                     <action selector="pressedLogIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fRq-tm-6hG"/>
@@ -76,7 +79,6 @@
                             <constraint firstItem="ICq-hc-Rsk" firstAttribute="top" secondItem="rfN-va-SZA" secondAttribute="bottom" constant="8" symbolic="YES" id="Ur1-62-A49"/>
                             <constraint firstItem="ycU-1f-JgP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="39" id="XYR-oM-BYl"/>
                             <constraint firstItem="sNe-rP-TmS" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.174946" id="ZnP-sc-O4r"/>
-                            <constraint firstItem="xGm-j1-bGZ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0593952" id="jOQ-zo-Dvz"/>
                             <constraint firstItem="ICq-hc-Rsk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="jke-8l-cfP"/>
                             <constraint firstItem="bQJ-hq-Sko" firstAttribute="top" secondItem="F2z-K6-Hhb" secondAttribute="bottom" constant="39" id="lnB-Mh-HPU"/>
                             <constraint firstItem="xGm-j1-bGZ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.866822" id="mhh-oT-ADm"/>
@@ -112,6 +114,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psS-et-fHv">
                                 <rect key="frame" x="29" y="750" width="370" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="lp9-UR-xeP"/>
+                                </constraints>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="pressedSignUp:" destination="Zqp-qN-8Yj" eventType="touchUpInside" id="HHH-qe-337"/>
@@ -149,7 +154,6 @@
                         <constraints>
                             <constraint firstItem="nyo-gr-aC2" firstAttribute="centerX" secondItem="QZu-25-4c9" secondAttribute="centerX" id="174-84-vY3"/>
                             <constraint firstItem="AV2-bW-daE" firstAttribute="leading" secondItem="XBT-p4-OjA" secondAttribute="leading" constant="20" id="5z4-lZ-IWB"/>
-                            <constraint firstItem="psS-et-fHv" firstAttribute="height" secondItem="QZu-25-4c9" secondAttribute="height" multiplier="0.0593952" id="9km-Hu-pmo"/>
                             <constraint firstItem="ss7-dA-aG5" firstAttribute="top" secondItem="XBT-p4-OjA" secondAttribute="top" constant="39" id="Axk-2e-Yuf"/>
                             <constraint firstItem="psS-et-fHv" firstAttribute="centerX" secondItem="QZu-25-4c9" secondAttribute="centerX" id="B97-Br-xEe"/>
                             <constraint firstItem="nyo-gr-aC2" firstAttribute="top" secondItem="XBT-p4-OjA" secondAttribute="top" constant="36" id="Bdf-ih-cia"/>
@@ -934,6 +938,9 @@
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcI-Z7-Ve4">
                                 <rect key="frame" x="29" y="750" width="370" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="EOi-H7-I2n"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <state key="normal" title="Sign Out"/>
                                 <connections>
@@ -967,12 +974,12 @@
                             <constraint firstItem="5CY-r0-nOT" firstAttribute="top" secondItem="nE6-7V-kbC" secondAttribute="bottom" constant="28" id="Ue0-v9-Cv8"/>
                             <constraint firstItem="kSI-fM-y3H" firstAttribute="trailing" secondItem="qdk-Hz-cPV" secondAttribute="trailing" constant="20" id="WMS-PC-WBo"/>
                             <constraint firstItem="qdk-Hz-cPV" firstAttribute="top" secondItem="P4a-FO-N39" secondAttribute="bottom" constant="13" id="XDg-yN-vgr"/>
-                            <constraint firstItem="pcI-Z7-Ve4" firstAttribute="height" secondItem="3TN-VL-joa" secondAttribute="height" multiplier="0.0593952" id="YAR-rx-mhu"/>
                             <constraint firstItem="kSI-fM-y3H" firstAttribute="trailing" secondItem="d1c-S5-kir" secondAttribute="trailing" constant="20" id="cKD-qK-dxV"/>
                             <constraint firstItem="aGC-Ds-lcZ" firstAttribute="leading" secondItem="kSI-fM-y3H" secondAttribute="leading" constant="20" id="ctL-Xb-sMe"/>
                             <constraint firstItem="bMz-yY-IAH" firstAttribute="top" secondItem="nE6-7V-kbC" secondAttribute="bottom" constant="26.666666666666686" id="fCK-8F-nt3"/>
                             <constraint firstItem="QeW-2Z-EVA" firstAttribute="centerY" secondItem="nE6-7V-kbC" secondAttribute="centerY" id="gS6-vX-cVM"/>
                             <constraint firstItem="qdk-Hz-cPV" firstAttribute="leading" secondItem="kSI-fM-y3H" secondAttribute="leading" constant="20" id="hWP-pz-ud6"/>
+                            <constraint firstItem="pcI-Z7-Ve4" firstAttribute="width" secondItem="3TN-VL-joa" secondAttribute="width" multiplier="0.864486" id="jg6-M3-JtH"/>
                             <constraint firstItem="kSI-fM-y3H" firstAttribute="trailing" secondItem="QeW-2Z-EVA" secondAttribute="trailing" constant="20" id="lGz-SX-2rE"/>
                             <constraint firstItem="5CY-r0-nOT" firstAttribute="leading" secondItem="9Ov-b3-Ykl" secondAttribute="trailing" constant="12" id="lMh-qZ-IWi"/>
                             <constraint firstItem="QeW-2Z-EVA" firstAttribute="top" secondItem="Ylh-G5-wTQ" secondAttribute="bottom" constant="26.666666666666686" id="oGL-j3-95J"/>
@@ -980,7 +987,6 @@
                             <constraint firstItem="kSI-fM-y3H" firstAttribute="trailing" secondItem="mkT-HJ-V0v" secondAttribute="trailing" constant="20" id="wEM-Hf-rZe"/>
                             <constraint firstItem="d1c-S5-kir" firstAttribute="centerY" secondItem="Ylh-G5-wTQ" secondAttribute="centerY" id="xrg-D9-FeZ"/>
                             <constraint firstItem="kSI-fM-y3H" firstAttribute="bottom" secondItem="pcI-Z7-Ve4" secondAttribute="bottom" constant="38" id="yHI-IK-dQI"/>
-                            <constraint firstItem="pcI-Z7-Ve4" firstAttribute="width" secondItem="3TN-VL-joa" secondAttribute="width" multiplier="0.864486" id="zjS-PD-k06"/>
                             <constraint firstItem="Ylh-G5-wTQ" firstAttribute="top" secondItem="9Ov-b3-Ykl" secondAttribute="bottom" constant="34" id="zq0-cs-21t"/>
                         </constraints>
                     </view>

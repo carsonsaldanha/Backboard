@@ -41,39 +41,6 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
         favoriteTeamLabel.text? = retrievedFavoriteTeam ?? "None"
         
-        let screenWidth = UIScreen.main.bounds.width
-        
-        // Adds the lines dynamically
-        let lineView = UIView(frame: CGRect(x: 20, y: emailLabel.center.y + 26, width: screenWidth - 40, height: 1))
-        lineView.layer.borderWidth = 1.0
-        lineView.layer.borderColor = UIColor.gray.cgColor
-        self.view.addSubview(lineView)
-        
-        let lineView2 = UIView(frame: CGRect(x: 20, y: favoriteTeamLabel.center.y + 26, width: screenWidth - 40, height: 1))
-        lineView2.layer.borderWidth = 1.0
-        lineView2.layer.borderColor = UIColor.gray.cgColor
-        self.view.addSubview(lineView2)
-        
-        let lineView3 = UIView(frame: CGRect(x: 20, y: themeLabel.center.y + 26, width: screenWidth - 40, height: 1))
-        lineView3.layer.borderWidth = 1.0
-        lineView3.layer.borderColor = UIColor.gray.cgColor
-        self.view.addSubview(lineView3)
-        
-        let lineView4 = UIView(frame: CGRect(x: 87, y: systemButton.center.y + 26, width: screenWidth - 107, height: 1))
-        lineView4.layer.borderWidth = 1.0
-        lineView4.layer.borderColor = UIColor.gray.cgColor
-        self.view.addSubview(lineView4)
-        
-        let lineView5 = UIView(frame: CGRect(x: 87, y: lightButton.center.y + 26, width: screenWidth - 107, height: 1))
-        lineView5.layer.borderWidth = 1.0
-        lineView5.layer.borderColor = UIColor.gray.cgColor
-        self.view.addSubview(lineView5)
-        
-        let lineView6 = UIView(frame: CGRect(x: 87, y: darkButton.center.y + 26, width: screenWidth - 107, height: 1))
-        lineView6.layer.borderWidth = 1.0
-        lineView6.layer.borderColor = UIColor.gray.cgColor
-        self.view.addSubview(lineView6)
-        
         //check user defaults to see if notifications were enabled
         let retrievedNotificationState = defaults.bool(forKey: "notifications")
         if (retrievedNotificationState == false) {
@@ -100,6 +67,41 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
             lightButton.isSelected = false
             darkButton.isSelected = true
         }
+    }
+    
+    // Adds the lines between the setting rows
+    override func viewDidAppear(_ animated: Bool) {
+        let screenWidth = UIScreen.main.bounds.width
+        
+        let lineView = UIView(frame: CGRect(x: 20, y: emailLabel.center.y + 25, width: screenWidth - 40, height: 1))
+        lineView.layer.borderWidth = 1.0
+        lineView.layer.borderColor = UIColor.gray.cgColor
+        self.view.addSubview(lineView)
+        
+        let lineView2 = UIView(frame: CGRect(x: 20, y: favoriteTeamLabel.center.y + 25, width: screenWidth - 40, height: 1))
+        lineView2.layer.borderWidth = 1.0
+        lineView2.layer.borderColor = UIColor.gray.cgColor
+        self.view.addSubview(lineView2)
+        
+        let lineView3 = UIView(frame: CGRect(x: 20, y: themeLabel.center.y + 25, width: screenWidth - 40, height: 1))
+        lineView3.layer.borderWidth = 1.0
+        lineView3.layer.borderColor = UIColor.gray.cgColor
+        self.view.addSubview(lineView3)
+        
+        let lineView4 = UIView(frame: CGRect(x: 87, y: systemButton.center.y + 25, width: screenWidth - 107, height: 1))
+        lineView4.layer.borderWidth = 1.0
+        lineView4.layer.borderColor = UIColor.gray.cgColor
+        self.view.addSubview(lineView4)
+        
+        let lineView5 = UIView(frame: CGRect(x: 87, y: lightButton.center.y + 25, width: screenWidth - 107, height: 1))
+        lineView5.layer.borderWidth = 1.0
+        lineView5.layer.borderColor = UIColor.gray.cgColor
+        self.view.addSubview(lineView5)
+        
+        let lineView6 = UIView(frame: CGRect(x: 87, y: darkButton.center.y + 25, width: screenWidth - 107, height: 1))
+        lineView6.layer.borderWidth = 1.0
+        lineView6.layer.borderColor = UIColor.gray.cgColor
+        self.view.addSubview(lineView6)
     }
     
     //change the current view controller to the phone's current mode
