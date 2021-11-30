@@ -67,7 +67,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func fetchTeamArticles() {
         var retrievedFavoriteTeam = UserDefaults.standard.string(forKey: "favoriteTeam")
         // If the user doesn't have a favorite team, just request popular NBA articles
-        if (retrievedFavoriteTeam == "None") {
+        if (retrievedFavoriteTeam == nil || retrievedFavoriteTeam == "None") {
             retrievedFavoriteTeam = "nba"
         }
         let newsAPI = "https://newsapi.org/v2/everything?" +
