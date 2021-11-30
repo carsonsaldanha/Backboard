@@ -1,4 +1,4 @@
-platform :ios, '14.5'
+platform :ios, '15.0'
 
 target 'Backboard' do
   use_frameworks!
