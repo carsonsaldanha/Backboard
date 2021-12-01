@@ -124,7 +124,9 @@ class TeamViewController: UIViewController, UITableViewDelegate, UITableViewData
         teamHeader.divRank.text = "(" + formattedDiv + ")"
         teamHeader.teamRecord.text = teamStandingData["win"].stringValue + "-" + teamStandingData["loss"].stringValue
         teamHeader.teamWinPct.text = "WinPct: " + teamStandingData["winPct"].stringValue
-        teamHeader.teamStreak.text = "Streak: " + teamStandingData["teamSitesOnly"]["streakText"].stringValue
+        
+        let streakType = teamStandingData["isWinStreak"].boolValue ? "W" : "L"
+        teamHeader.teamStreak.text = "Streak: \(streakType)\(teamStandingData["streak"].stringValue)"
     }
     
     // Specifices table length for either roster or stats tables

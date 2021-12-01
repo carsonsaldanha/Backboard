@@ -38,14 +38,16 @@ func convertUTCtoLocal(utcTime: String) -> String {
 
 // Formats a ranking from a given number
 func formatRank(rank: String) -> String{
-    switch rank {
-    case "1":
-        return "1st"
-    case "2":
-        return "2nd"
-    case "3":
-        return "3rd"
-    default:
+    if rank.hasSuffix("1") && !rank.hasSuffix("11"){
+        return rank + "st"
+    }
+    else if rank.hasSuffix("2") && !rank.hasSuffix("12"){
+        return rank + "nd"
+    }
+    else if rank.hasSuffix("3") && !rank.hasSuffix("13"){
+        return rank + "rd"
+    }
+    else{
         return rank + "th"
     }
 }
