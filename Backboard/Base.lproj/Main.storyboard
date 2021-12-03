@@ -332,9 +332,6 @@
                                     </label>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="tAI-4g-ZXv">
                                         <rect key="frame" x="303" y="83" width="101" height="31"/>
-                                        <date key="minimumDate" timeIntervalSinceReferenceDate="499082400">
-                                            <!--2016-10-25 10:00:00 +0000-->
-                                        </date>
                                         <connections>
                                             <action selector="selectDate:" destination="BYp-kU-K1y" eventType="valueChanged" id="jx3-6U-AIh"/>
                                         </connections>
