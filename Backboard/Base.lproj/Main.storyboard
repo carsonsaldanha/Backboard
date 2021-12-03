@@ -335,9 +335,6 @@
                                         <date key="minimumDate" timeIntervalSinceReferenceDate="499082400">
                                             <!--2016-10-25 10:00:00 +0000-->
                                         </date>
-                                        <date key="maximumDate" timeIntervalSinceReferenceDate="678362400">
-                                            <!--2022-07-01 10:00:00 +0000-->
-                                        </date>
                                         <connections>
                                             <action selector="selectDate:" destination="BYp-kU-K1y" eventType="valueChanged" id="jx3-6U-AIh"/>
                                         </connections>
