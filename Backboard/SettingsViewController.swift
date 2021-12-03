@@ -29,17 +29,18 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         
         UNUserNotificationCenter.current().delegate = self
         
-        // Design for the signout button
-        signOutButton.backgroundColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
-        signOutButton.layer.cornerRadius = 25.0
-        signOutButton.tintColor = UIColor.white
-        
         // Get and display the favorite team and account email
         emailLabel.text! = (Auth.auth().currentUser?.email)!
         
         let defaults = UserDefaults.standard
         let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
         favoriteTeamLabel.text? = retrievedFavoriteTeam ?? "None"
+        
+        // Design for the signout button
+        let hexCode = teamHexCodes[retrievedFavoriteTeam ?? "None"]
+        signOutButton.backgroundColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
+        signOutButton.layer.cornerRadius = 25.0
+        signOutButton.tintColor = UIColor.white
         
         //check user defaults to see if notifications were enabled
         let retrievedNotificationState = defaults.bool(forKey: "notifications")
@@ -48,6 +49,9 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         } else {
             notificationsSwitch.isOn = true
         }
+        
+        //change color of the radio buttons with the team color
+        DLRadioButton.appearance().tintColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
         
         //check user defaults to see the phone's current display mode
         //select and deselect the buttons according to the setting

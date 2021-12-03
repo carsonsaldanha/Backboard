@@ -9,7 +9,10 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+//RGB colors of each team
+public var teamHexCodes: [String : (Int, Int, Int)] = ["Hawks":(225, 68, 52), "Celtics":(0, 122, 51), "Nets":(0, 0, 0), "Hornets":(29, 17, 96), "Bulls":(206, 17, 65), "Cavaliers":(134, 0, 56), "Mavericks":(0, 83, 188), "Nuggets":(13, 34, 64), "Pistons":(200, 16, 46), "Warriors":(29, 66, 138), "Rockets":(206, 17, 65), "Pacers":(0, 45, 98), "Clippers":(200, 16, 46), "Lakers":(85, 37, 130), "Grizzlies":(93, 118, 169), "Heat":(152, 0, 46), "Bucks":(0, 71, 27), "Timberwolves":(12, 35, 64), "Pelicans":(0, 22, 65), "Knicks":(0, 107, 182), "Thunder":(0, 125, 195), "Magic":(0, 125, 197), "76ers":(0, 107, 182), "Suns":(29, 17, 96), "Trail Blazers":(224, 58, 62), "Kings":(91, 43, 130), "Spurs":(196, 206, 211), "Raptors":(206, 17, 65), "Jazz":(0, 43, 92), "Wizards":(0, 43, 92), "None":(231, 51, 55)]
+
+class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
     
     @IBOutlet weak var scoresTableView: UITableView!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -61,6 +64,13 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         UIDatePicker.appearance().tintColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
         scoresTableView.delegate = self
         scoresTableView.dataSource = self
+        
+        //changes the color of the tab bar icon to the team's color
+        let defaults = UserDefaults.standard
+        let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
+        let hexCode = teamHexCodes[retrievedFavoriteTeam ?? "None"]
+        UITabBar.appearance().tintColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
+        
         fetchGames()
     }
     
