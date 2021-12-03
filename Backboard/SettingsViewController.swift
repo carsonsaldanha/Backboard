@@ -50,8 +50,9 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
             notificationsSwitch.isOn = true
         }
         
-        //change color of the radio buttons with the team color
+        // Change accent color of the radio buttons and notifications switch with the team color
         DLRadioButton.appearance().tintColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
+        notificationsSwitch.onTintColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
         
         //check user defaults to see the phone's current display mode
         //select and deselect the buttons according to the setting

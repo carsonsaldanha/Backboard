@@ -930,7 +930,6 @@
                                     <constraint firstAttribute="height" constant="31" id="189-i0-6IO"/>
                                     <constraint firstAttribute="width" constant="47" id="8BX-qb-EiQ"/>
                                 </constraints>
-                                <color key="onTintColor" red="0.90721040959999999" green="0.20142331720000001" blue="0.21621975299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="notificationsSwitchToggled:" destination="Lo3-iS-X8Y" eventType="valueChanged" id="FbU-i2-jed"/>
                                 </connections>
@@ -1015,9 +1014,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="0.90720909829999996" green="0.20142930749999999" blue="0.21231520179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
                                 <color key="value" systemColor="systemGrayColor"/>
                             </userDefinedRuntimeAttribute>
@@ -2183,7 +2179,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Bfd-Bh-eDA"/>
+        <segue reference="KPu-hY-Oaw"/>
         <segue reference="hrb-Kr-3wz"/>
     </inferredMetricsTieBreakers>
     <resources>
