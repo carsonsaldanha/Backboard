@@ -61,14 +61,14 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIDatePicker.appearance().tintColor = UIColor.init(red: 231/255, green: 51/255, blue: 55/255, alpha: 1)
         scoresTableView.delegate = self
         scoresTableView.dataSource = self
         
-        //changes the color of the tab bar icon to the team's color
+        // Changes the app accent color to the team's color
         let defaults = UserDefaults.standard
         let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
         let hexCode = teamHexCodes[retrievedFavoriteTeam ?? "None"]
+        UIDatePicker.appearance().tintColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
         UITabBar.appearance().tintColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
         
         fetchGames()
