@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
+class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var scoresTableView: UITableView!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -18,38 +18,6 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var gameDate = Date()
     var selectedTeamID = String()
     var changedDate = false
-    let teamNamesDictonary = [
-        "ATL" : "Hawks",
-        "BKN" : "Nets",
-        "BOS" : "Celtics",
-        "CHA" : "Hornets",
-        "CHI" : "Bulls",
-        "CLE" : "Cavaliers",
-        "DAL" : "Mavericks",
-        "DEN" : "Nuggets",
-        "DET" : "Pistons",
-        "GSW" : "Warriors",
-        "HOU" : "Rockets",
-        "IND" : "Pacers",
-        "LAC" : "Clippers",
-        "LAL" : "Lakers",
-        "MEM" : "Grizzlies",
-        "MIA" : "Heat",
-        "MIL" : "Bucks",
-        "MIN" : "Timberwolves",
-        "NOP" : "Pelicans",
-        "NYK" : "Knicks",
-        "OKC" : "Thunder",
-        "ORL" : "Magic",
-        "PHI" : "76ers",
-        "PHX" : "Suns",
-        "POR" : "Trail Blazers",
-        "SAC" : "Kings",
-        "SAS" : "Spurs",
-        "TOR" : "Raptors",
-        "UTA" : "Jazz",
-        "WAS" : "Wizards"
-    ]
     
     let scoreCellIdentifier = "Scores Cell"
     let gameSegueIdentifier = "Game Segue"
@@ -64,7 +32,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         formatTeamColors()
         fetchGames()
     }
-    
+
     // Returns the number of games in the table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gamesList.count
@@ -178,6 +146,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    // Updates games based on selected date
     @IBAction func selectDate(_ sender: Any) {
         gameDate = datePicker.date
         gamesList = []
@@ -185,6 +154,7 @@ class ScoresViewController: UIViewController, UITableViewDelegate, UITableViewDa
         fetchGames()
     }
     
+    // Segues to team or game screens based on user selection
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == gameSegueIdentifier,
            let destination = segue.destination as? GameViewController,

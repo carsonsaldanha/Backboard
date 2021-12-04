@@ -5,6 +5,8 @@
 //  Created by Cole Kauppinen on 11/16/21.
 //
 
+// Contains various methods used for formatting/displaying info throughout Backboard
+
 import Foundation
 import SwiftyJSON
 
@@ -72,6 +74,7 @@ func formatGameClock(gameData: JSON) -> String {
     }
 }
 
+// Returns the game quarter/period depending on its current status
 func formatGamePeriod(gameData: JSON) -> String {
     if gameData["statusNum"].intValue != 2 || gameData["period"]["isHalftime"].boolValue {
         return ""
@@ -79,49 +82,17 @@ func formatGamePeriod(gameData: JSON) -> String {
     return "Q" + gameData["period"]["current"].stringValue
 }
 
-// Changes the app accent color to the team's color
+// Changes the tab bar and calendar accent color to fit the favorite team's color scheme
 func formatTeamColors() {
     let defaults = UserDefaults.standard
     let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
     let hexCode = teamHexCodes[retrievedFavoriteTeam ?? "None"]
-    let primaryColor = hexCode!.0
-    let secondaryColor = hexCode!.1
-    print(primaryColor)
-    UIDatePicker.appearance().tintColor = UIColor.init(red: CGFloat(Double(primaryColor.0)/255), green: CGFloat(Double(primaryColor.1)/255), blue: CGFloat(Double(primaryColor.2)/255), alpha: 1)
-    UITabBar.appearance().tintColor = UIColor.init(red: CGFloat(Double(primaryColor.0)/255), green: CGFloat(Double(primaryColor.1)/255), blue: CGFloat(Double(primaryColor.2)/255), alpha: 1)
-    UITabBar.appearance().unselectedItemTintColor = UIColor.init(red: CGFloat(Double(secondaryColor.0)/255), green: CGFloat(Double(secondaryColor.1)/255), blue: CGFloat(Double(secondaryColor.2)/255), alpha: 1)
+    let primaryHex = hexCode!.0
+    let secondaryHex = hexCode!.1
+    let primaryColor = UIColor.init(red: CGFloat(Double(primaryHex.0)/255), green: CGFloat(Double(primaryHex.1)/255), blue: CGFloat(Double(primaryHex.2)/255), alpha: 1)
+    let secondaryColor = UIColor.init(red: CGFloat(Double(secondaryHex.0)/255), green: CGFloat(Double(secondaryHex.1)/255), blue: CGFloat(Double(secondaryHex.2)/255), alpha: 1)
+    
+    UIDatePicker.appearance().tintColor = primaryColor
+    UITabBar.appearance().tintColor = primaryColor
+    UITabBar.appearance().unselectedItemTintColor = secondaryColor
 }
-
-// RGB colors of each team
-var teamHexCodes: [String : ((Int, Int, Int), (Int, Int, Int))] = [
-    "Hawks": ((225, 68, 52), (196, 214, 0)),
-    "Celtics": ((0, 122, 51), (139, 111, 78)),
-    "Nets": ((112, 114, 113), (255, 255, 255)),
-    "Hornets": ((29, 17, 96), (0, 120, 140)),
-    "Bulls": ((206, 17, 65), (6, 25, 34)),
-    "Cavaliers": ((134, 0, 56), (4, 30, 66)),
-    "Mavericks": ((0, 83, 188), (0, 43, 92)),
-    "Nuggets": ((13, 34, 64), (255, 198, 39)),
-    "Pistons": ((200, 16, 46), (29,66,138)),
-    "Warriors": ((29, 66, 138), (255, 199, 44)),
-    "Rockets": ((206, 17, 65), (6,25,34)),
-    "Pacers": ((0, 45, 98), (253, 187, 48)),
-    "Clippers": ((200, 16, 46), (29,66,148)),
-    "Lakers": ((85, 37, 130), (253, 185, 39)),
-    "Grizzlies": ((93, 118, 169), (18, 23, 63)),
-    "Heat": ((152, 0, 46), (249, 160, 27)),
-    "Bucks": ((0, 71, 27), (180, 176, 158)),
-    "Timberwolves": ((12, 35, 64), (35, 97, 146)),
-    "Pelicans": ((0, 22, 65), (225, 58, 62)),
-    "Knicks": ((0, 107, 182), (245, 132, 38)),
-    "Thunder": ((0, 125, 195), (239, 59, 36)),
-    "Magic": ((0, 125, 197), (196, 206, 211)),
-    "76ers": ((0, 107, 182), (237, 23, 76)),
-    "Suns": ((29, 17, 96), (229, 95, 32)),
-    "Trail Blazers": ((224, 58, 62), (6, 25, 34)),
-    "Kings": ((91, 43, 130), (99, 113, 122)),
-    "Spurs": ((196, 206, 211), (6, 25, 34)),
-    "Raptors": ((206, 17, 65), (6, 25, 34)),
-    "Jazz": ((0, 43, 92), (0, 71, 27)),
-    "Wizards": ((0, 43, 92), (227,24,55)),
-    "None": ((231, 51, 55), (231, 51, 55))]

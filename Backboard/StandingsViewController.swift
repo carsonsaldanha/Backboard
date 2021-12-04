@@ -48,6 +48,11 @@ class StandingsViewController: UIViewController, UITableViewDelegate, UITableVie
         fetchStandings()
     }
     
+    // Reloads data to refresh standings or bold a new favorite team
+    override func viewDidAppear(_ animated: Bool) {
+        standingsTableView.reloadData()
+    }
+    
     // Upon the segement selected, sets the boolean to use for which conference should be displayed in the table
     @IBAction func onConferenceSegmentSelected(_ sender: Any) {
         switch conferenceSegmentedControl.selectedSegmentIndex {

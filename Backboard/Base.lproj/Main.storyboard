@@ -780,12 +780,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seU-SX-z7O">
-                                <rect key="frame" x="366.66666666666669" y="203" width="41.333333333333314" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemGray2Color"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ov-b3-Ykl">
                                 <rect key="frame" x="20" y="252" width="55" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -942,6 +936,15 @@
                                     <action selector="presssedSignOutButton:" destination="Lo3-iS-X8Y" eventType="touchUpInside" id="W77-aI-3eY"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="grH-SZ-2dU">
+                                <rect key="frame" x="283" y="198.66666666666666" width="125" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="AhJ-LQ-Mec"/>
+                                    <constraint firstAttribute="height" constant="30" id="gkg-uh-vHZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kSI-fM-y3H"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -955,12 +958,10 @@
                             <constraint firstItem="1ZH-Dm-IBA" firstAttribute="top" secondItem="5CY-r0-nOT" secondAttribute="bottom" constant="25" id="EcJ-J6-kPc"/>
                             <constraint firstItem="P4a-FO-N39" firstAttribute="top" secondItem="5CY-r0-nOT" secondAttribute="bottom" constant="30" id="Ib2-E5-CRR"/>
                             <constraint firstItem="DZc-2I-GPi" firstAttribute="leading" secondItem="kSI-fM-y3H" secondAttribute="leading" constant="20" id="Ji7-8D-2hv"/>
-                            <constraint firstItem="kSI-fM-y3H" firstAttribute="trailing" secondItem="seU-SX-z7O" secondAttribute="trailing" constant="20" id="Jnv-ZH-J2c"/>
                             <constraint firstItem="nE6-7V-kbC" firstAttribute="leading" secondItem="9Ov-b3-Ykl" secondAttribute="trailing" constant="12" id="KCv-gE-9TP"/>
                             <constraint firstItem="bMz-yY-IAH" firstAttribute="centerY" secondItem="5CY-r0-nOT" secondAttribute="centerY" id="KfK-IQ-Ggr"/>
                             <constraint firstItem="nE6-7V-kbC" firstAttribute="top" secondItem="Ylh-G5-wTQ" secondAttribute="bottom" constant="28" id="LT5-mJ-0dl"/>
                             <constraint firstItem="kSI-fM-y3H" firstAttribute="trailing" secondItem="bMz-yY-IAH" secondAttribute="trailing" constant="21" id="NJc-TT-uaN"/>
-                            <constraint firstItem="seU-SX-z7O" firstAttribute="top" secondItem="mkT-HJ-V0v" secondAttribute="bottom" constant="28" id="O4p-5g-nPK"/>
                             <constraint firstItem="F7g-23-l7M" firstAttribute="centerX" secondItem="3TN-VL-joa" secondAttribute="centerX" id="P0k-EF-I9J"/>
                             <constraint firstItem="P4a-FO-N39" firstAttribute="leading" secondItem="kSI-fM-y3H" secondAttribute="leading" constant="20" id="QQp-Z3-8Di"/>
                             <constraint firstItem="F7g-23-l7M" firstAttribute="top" secondItem="kSI-fM-y3H" secondAttribute="top" constant="36" id="RM9-i3-Qwg"/>
@@ -969,9 +970,11 @@
                             <constraint firstItem="5CY-r0-nOT" firstAttribute="top" secondItem="nE6-7V-kbC" secondAttribute="bottom" constant="28" id="Ue0-v9-Cv8"/>
                             <constraint firstItem="kSI-fM-y3H" firstAttribute="trailing" secondItem="qdk-Hz-cPV" secondAttribute="trailing" constant="20" id="WMS-PC-WBo"/>
                             <constraint firstItem="qdk-Hz-cPV" firstAttribute="top" secondItem="P4a-FO-N39" secondAttribute="bottom" constant="13" id="XDg-yN-vgr"/>
+                            <constraint firstItem="kSI-fM-y3H" firstAttribute="trailing" secondItem="grH-SZ-2dU" secondAttribute="trailing" constant="20" id="b7J-ZK-swY"/>
                             <constraint firstItem="kSI-fM-y3H" firstAttribute="trailing" secondItem="d1c-S5-kir" secondAttribute="trailing" constant="20" id="cKD-qK-dxV"/>
                             <constraint firstItem="aGC-Ds-lcZ" firstAttribute="leading" secondItem="kSI-fM-y3H" secondAttribute="leading" constant="20" id="ctL-Xb-sMe"/>
                             <constraint firstItem="bMz-yY-IAH" firstAttribute="top" secondItem="nE6-7V-kbC" secondAttribute="bottom" constant="26.666666666666686" id="fCK-8F-nt3"/>
+                            <constraint firstItem="grH-SZ-2dU" firstAttribute="centerY" secondItem="aGC-Ds-lcZ" secondAttribute="centerY" id="g6f-Bv-f4j"/>
                             <constraint firstItem="QeW-2Z-EVA" firstAttribute="centerY" secondItem="nE6-7V-kbC" secondAttribute="centerY" id="gS6-vX-cVM"/>
                             <constraint firstItem="qdk-Hz-cPV" firstAttribute="leading" secondItem="kSI-fM-y3H" secondAttribute="leading" constant="20" id="hWP-pz-ud6"/>
                             <constraint firstItem="pcI-Z7-Ve4" firstAttribute="width" secondItem="3TN-VL-joa" secondAttribute="width" multiplier="0.864486" id="jg6-M3-JtH"/>
@@ -989,7 +992,7 @@
                     <connections>
                         <outlet property="darkButton" destination="bMz-yY-IAH" id="cCv-NI-0tp"/>
                         <outlet property="emailLabel" destination="mkT-HJ-V0v" id="OgD-so-Zhi"/>
-                        <outlet property="favoriteTeamLabel" destination="seU-SX-z7O" id="0Kb-mc-CaT"/>
+                        <outlet property="favoriteTeamPicker" destination="grH-SZ-2dU" id="tI1-XM-xoD"/>
                         <outlet property="lightButton" destination="QeW-2Z-EVA" id="c0i-C3-CCg"/>
                         <outlet property="notificationsSwitch" destination="1ZH-Dm-IBA" id="2aC-9S-NgB"/>
                         <outlet property="signOutButton" destination="pcI-Z7-Ve4" id="Wcy-iQ-Xhk"/>
@@ -1010,11 +1013,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
-                                <color key="value" systemColor="systemGrayColor"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="BYp-kU-K1y" kind="relationship" relationship="viewControllers" id="ncE-Pi-dDR"/>
@@ -2176,7 +2174,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KPu-hY-Oaw"/>
+        <segue reference="bjO-9j-dBJ"/>
         <segue reference="hrb-Kr-3wz"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -2197,9 +2195,6 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

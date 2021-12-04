@@ -16,12 +16,6 @@ class LogInViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var teamPickerView: UIPickerView!
     
-    let teams: [String] = ["None", "76ers", "Bucks", "Bulls", "Cavaliers", "Celtics", "Clippers",
-                           "Grizzlies", "Hawks", "Heat", "Hornets", "Jazz", "Kings",
-                           "Knicks", "Lakers", "Magic", "Mavericks", "Nets", "Nuggets",
-                           "Pacers", "Pelicans", "Pistons", "Raptors", "Rockets", "Spurs",
-                           "Suns", "Thunder", "Timberwolves", "Trail Blazers", "Warriors", "Wizards"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,12 +54,12 @@ class LogInViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // Number of rows of data for picker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return teams.count
+        return leagueTeams.count
     }
     
     // Returns the team for the row and component (column) on the picker
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return teams[row]
+        return leagueTeams[row]
     }
     
     // Uses Firebase authentication to log in a user upon button press
@@ -92,7 +86,7 @@ class LogInViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         // Define a key and value for the user's favorite team
         let kFavoriteTeamKey = "favoriteTeam"
-        let team = teams[teamPickerView.selectedRow(inComponent: 0)]
+        let team = leagueTeams[teamPickerView.selectedRow(inComponent: 0)]
         // Get a reference to the global user defaults object and store the user's favorite team
         let defaults = UserDefaults.standard
         defaults.set(team, forKey: kFavoriteTeamKey)

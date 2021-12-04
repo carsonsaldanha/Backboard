@@ -13,19 +13,22 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
 
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var favoriteTeamLabel: UILabel!
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var systemButton: DLRadioButton!
     @IBOutlet weak var lightButton: DLRadioButton!
     @IBOutlet weak var darkButton: DLRadioButton!
     @IBOutlet weak var notificationsSwitch: UISwitch!
+    @IBOutlet weak var favoriteTeamPicker: UITextField!
     
     var currentView: UIUserInterfaceStyle!
     var updateView: UIUserInterfaceStyle!
     var pressedSave = false
+    var teamPicker = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        teamPicker.delegate = self
+        teamPicker.dataSource = self
         
         UNUserNotificationCenter.current().delegate = self
         
@@ -34,15 +37,21 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         
         let defaults = UserDefaults.standard
         let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
-        favoriteTeamLabel.text? = retrievedFavoriteTeam ?? "None"
         
-        // Design for the signout button
-        let hexCode = teamHexCodes[retrievedFavoriteTeam ?? "None"]
-        let primaryColor = hexCode!.0
-        let secondaryColor = hexCode!.1
-        signOutButton.backgroundColor = UIColor.init(red: CGFloat(Double(secondaryColor.0)/255), green: CGFloat(Double(secondaryColor.1)/255), blue: CGFloat(Double(secondaryColor.2)/255), alpha: 1)
+        // Format team picker and display current favorite team
+        favoriteTeamPicker.inputView = teamPicker
+        favoriteTeamPicker.tintColor = .clear
+        favoriteTeamPicker.text? = retrievedFavoriteTeam ?? "None"
+        favoriteTeamPicker.layer.cornerRadius = 10.0
+        favoriteTeamPicker.layer.borderWidth = 1.5
+        favoriteTeamPicker.textColor = UIColor.white
+        
+        // Format sign out button
         signOutButton.layer.cornerRadius = 25.0
         signOutButton.tintColor = UIColor.white
+        
+        // Sets colors based on team theme
+        setButtonColors()
         
         //check user defaults to see if notifications were enabled
         let retrievedNotificationState = defaults.bool(forKey: "notifications")
@@ -51,10 +60,6 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         } else {
             notificationsSwitch.isOn = true
         }
-        
-        // Change accent color of the radio buttons and notifications switch with the team color
-        DLRadioButton.appearance().tintColor = UIColor.init(red: CGFloat(Double(primaryColor.0)/255), green: CGFloat(Double(primaryColor.1)/255), blue: CGFloat(Double(primaryColor.2)/255), alpha: 1)
-        notificationsSwitch.onTintColor = UIColor.init(red: CGFloat(Double(primaryColor.0)/255), green: CGFloat(Double(primaryColor.1)/255), blue: CGFloat(Double(primaryColor.2)/255), alpha: 1)
         
         //check user defaults to see the phone's current display mode
         //select and deselect the buttons according to the setting
@@ -85,7 +90,7 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         lineView.layer.borderColor = UIColor.gray.cgColor
         self.view.addSubview(lineView)
         
-        let lineView2 = UIView(frame: CGRect(x: 20, y: favoriteTeamLabel.center.y + 25, width: screenWidth - 40, height: 1))
+        let lineView2 = UIView(frame: CGRect(x: 20, y: favoriteTeamPicker.center.y + 25, width: screenWidth - 40, height: 1))
         lineView2.layer.borderWidth = 1.0
         lineView2.layer.borderColor = UIColor.gray.cgColor
         self.view.addSubview(lineView2)
@@ -178,7 +183,7 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         }
     }
     
-    //log out if we press the sign out button
+    // Log out if we press the sign out button
     @IBAction func presssedSignOutButton(_ sender: Any) {
         do {
             try Auth.auth().signOut()
@@ -190,5 +195,67 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         catch {
             print("Error, Cannot sign out")
         }
+    }
+    
+    // Helper method to set button colors based on favorite team theme
+    func setButtonColors() {
+        let defaults = UserDefaults.standard
+        let retrievedFavoriteTeam = defaults.string(forKey: "favoriteTeam")
+        
+        // Retrieves team primary and secondary colors
+        let hexCode = teamHexCodes[retrievedFavoriteTeam ?? "None"]
+        let primaryHex = hexCode!.0
+        let secondaryHex = hexCode!.1
+        let primaryColor = UIColor.init(red: CGFloat(Double(primaryHex.0)/255), green: CGFloat(Double(primaryHex.1)/255), blue: CGFloat(Double(primaryHex.2)/255), alpha: 1)
+        let secondaryColor = UIColor.init(red: CGFloat(Double(secondaryHex.0)/255), green: CGFloat(Double(secondaryHex.1)/255), blue: CGFloat(Double(secondaryHex.2)/255), alpha: 1)
+        
+        // Design for the signout button
+        signOutButton.backgroundColor = secondaryColor
+        
+        // Change accent color of the radio buttons and notifications switch with the team color
+        DLRadioButton.appearance().tintColor = primaryColor
+        notificationsSwitch.onTintColor = primaryColor
+
+        // Change accent color of favorite team picker based on selection
+        favoriteTeamPicker.layer.borderColor = secondaryColor.cgColor
+        favoriteTeamPicker.layer.backgroundColor = secondaryColor.cgColor
+    }
+}
+
+// A class extension that allows users to change their favorite team via a text field acting as picker
+extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return leagueTeams.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return leagueTeams[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // Changes user defaults based on new team selection
+        let defaults = UserDefaults.standard
+        defaults.set(leagueTeams[row], forKey: "favoriteTeam")
+        
+        // Updates app theme based on team selection
+        formatTeamColors()
+        setButtonColors()
+        favoriteTeamPicker.text = leagueTeams[row]
+        
+        // Removes and re-adds UIWindow subviews to view hierarchy to update tab bar
+        let windowList = UIApplication.shared.windows
+        let uiWindow = windowList[0]
+        for view in uiWindow.subviews {
+            view.removeFromSuperview()
+            uiWindow.addSubview(view)
+        }
+        
+        // Closes out of picker upon selection
+        favoriteTeamPicker.resignFirstResponder()
     }
 }
