@@ -38,7 +38,9 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         
         // Design for the signout button
         let hexCode = teamHexCodes[retrievedFavoriteTeam ?? "None"]
-        signOutButton.backgroundColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
+        let primaryColor = hexCode!.0
+        let secondaryColor = hexCode!.1
+        signOutButton.backgroundColor = UIColor.init(red: CGFloat(Double(secondaryColor.0)/255), green: CGFloat(Double(secondaryColor.1)/255), blue: CGFloat(Double(secondaryColor.2)/255), alpha: 1)
         signOutButton.layer.cornerRadius = 25.0
         signOutButton.tintColor = UIColor.white
         
@@ -51,8 +53,8 @@ class SettingsViewController: UIViewController, UNUserNotificationCenterDelegate
         }
         
         // Change accent color of the radio buttons and notifications switch with the team color
-        DLRadioButton.appearance().tintColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
-        notificationsSwitch.onTintColor = UIColor.init(red: CGFloat(Double(hexCode!.0)/255), green: CGFloat(Double(hexCode!.1)/255), blue: CGFloat(Double(hexCode!.2)/255), alpha: 1)
+        DLRadioButton.appearance().tintColor = UIColor.init(red: CGFloat(Double(primaryColor.0)/255), green: CGFloat(Double(primaryColor.1)/255), blue: CGFloat(Double(primaryColor.2)/255), alpha: 1)
+        notificationsSwitch.onTintColor = UIColor.init(red: CGFloat(Double(primaryColor.0)/255), green: CGFloat(Double(primaryColor.1)/255), blue: CGFloat(Double(primaryColor.2)/255), alpha: 1)
         
         //check user defaults to see the phone's current display mode
         //select and deselect the buttons according to the setting
