@@ -142,10 +142,10 @@
 				DA93629D27161521000F00B7 /* StandingsViewController.swift */,
 				DA93629F2716152E000F00B7 /* SettingsViewController.swift */,
 				F29B64D627447CEB00852C1F /* FormattingMethods.swift */,
+				F2688207275C11EE008A3C6E /* GlobalTeamData.swift */,
 				DA93628A271611D7000F00B7 /* Assets.xcassets */,
 				DA93628F271611D7000F00B7 /* Info.plist */,
 				641BAC5F271A05C6000A5C25 /* GoogleService-Info.plist */,
-				F2688207275C11EE008A3C6E /* GlobalTeamData.swift */,
 			);
 			path = Backboard;
 			sourceTree = "<group>";
