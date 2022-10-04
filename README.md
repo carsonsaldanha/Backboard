@@ -1,4 +1,4 @@
-# backboard
+# backboard-ios
 A basketball iOS app.
 
 Backboard is a fully native iOS app with the following features:
